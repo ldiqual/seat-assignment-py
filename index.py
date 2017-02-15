@@ -18,6 +18,9 @@ class SeatingProblem:
         self.num_rows = 0
         self.num_cols = 0
 
+        self.table_tags = []
+        self.employee_tags = []
+
         self.employees = []
         self.num_employees = 0
 
@@ -29,6 +32,30 @@ class SeatingProblem:
         self.layout = layout
         self.num_rows = len(layout)
         self.num_cols = len(layout[0]) if self.num_rows > 0 else 0
+
+    def set_table_tags(self, table_tags):
+        self.table_tags = table_tags
+
+    def set_employee_tags(self, employee_tags):
+        self.employee_tags = employee_tags
+
+        self.add_assignment_variables_if_necessary()
+
+        for employee_name, tag in employee_tags.iteritems():
+            employee_index = self.employees.index(employee_name)
+            if employee_index == -1:
+                raise ValueError("Could not find index of provided employee {}".format(employee_name))
+
+            for row in range(self.num_rows):
+                for col in range(self.num_cols):
+
+                    if not self.layout[row][col]:
+                        continue
+
+                    table_tags = self.table_tags[row][col]
+                    if not tag in table_tags:
+                        assignment_var = self.assignment_variables[row][col][employee_index]
+                        self.problem += (assignment_var == 0)
 
     def add_assignment_variables_if_necessary(self):
 
@@ -196,9 +223,64 @@ layout = [
     [False, False, False, True,  True,  False,  False],
 ]
 
+table_tags = [[[] for col in range(7)] for row in range(11)]
+def set_tags(row, tags):
+    for col in range(len(table_tags[row])):
+        table_tags[row][col] = tags
+set_tags(0, ['eng'])
+set_tags(1, ['eng'])
+set_tags(3, ['product'])
+set_tags(4, ['product', 'marketing'])
+set_tags(6, ['marketing', 'sales'])
+set_tags(7, ['sales', 'support'])
+set_tags(9, ['support'])
+
+employee_tags = {
+
+    'Robert': 'eng',
+    'Scott': 'eng',
+    'Guy': 'eng',
+    'Bo': 'eng',
+    'Idan': 'eng',
+    'Chloe': 'eng',
+    'Lois': 'eng',
+    'Kaili': 'eng',
+    'Alex': 'eng',
+    'Randy': 'eng',
+
+    'Cassy': 'product',
+    'Sam': 'product',
+    'Enrico': 'product',
+    'Rachel': 'product',
+    'Jon': 'product',
+    'Yarin': 'product',
+
+    'Clavens': 'marketing',
+    'Laura Lynn': 'marketing',
+    'Baker': 'marketing',
+    'Julie': 'marketing',
+
+    'Rob': 'sales',
+    'Tim': 'sales',
+    'Rebecca': 'sales',
+    'Adam': 'sales',
+    'David W': 'sales',
+    'Kitty': 'sales',
+    'Sabrina': 'sales',
+
+
+    'Enrique': 'support',
+    'Justin': 'support',
+    'Bobby': 'support',
+    'Ericka': 'support'
+}
+
+
 problem = SeatingProblem()
 problem.set_employees(employees)
 problem.set_table_layout(layout)
+problem.set_table_tags(table_tags)
+problem.set_employee_tags(employee_tags)
 problem.add_distance_constraint(employee1_name='Lois', employee2_name='Randy', distance=1)
 problem.add_position_constraint(employee_name='Randy', table_location=Location(row=0, col=0))
 result = problem.solve()
