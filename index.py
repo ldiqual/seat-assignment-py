@@ -112,6 +112,18 @@ class SeatingProblem:
 
         self.problem += (sum == distance)
 
+    def add_position_constraint(self, employee_name, table_location):
+        employee_index = self.employees.index(employee_name)
+
+        if employee_index == -1:
+            raise ValueError("Could not find index of provided employee")
+
+        if table_location.row >= self.num_rows or table_location.col >= self.num_cols:
+            raise ValueError("Table location doesn't match the provided layout")
+
+        var = self.assignment_variables[table_location.row][table_location.col][employee_index]
+        self.problem += (var == 1)
+
 
     def get_employee_index_assigned_to_table(self, row, col):
         vars = self.assignment_variables[row][col]
@@ -168,7 +180,7 @@ problem = SeatingProblem()
 problem.set_employees(employees)
 problem.set_table_layout(layout)
 problem.add_distance_constraint(employee1_name='Lois', employee2_name='Randy', distance=1)
-problem.add_distance_constraint(employee1_name='Randy', employee2_name='Alex', distance=1)
+problem.add_position_constraint(employee_name='Randy', table_location=Location(row=0, col=0))
 result = problem.solve()
 
 print(tabulate(result))
