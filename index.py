@@ -171,7 +171,14 @@ class SeatingProblem:
 
         return assignments
 
-employees = ['Lois', 'Randy', 'Alex']
+employees = [
+    'Robert', 'Scott', 'Guy', 'Bo', 'Idan', 'Chloe', 'Lois', 'Kaili', 'Alex', 'Randy', # Eng
+    'Cassy', 'Sam', 'Enrico', 'Rachel', 'Jon', 'Yarin', # Product
+    'Clavens', 'Laura Lynn', 'Baker', 'Julie', # Marketing
+    'Rob', 'Tim', 'Rebecca', 'Adam', 'David W', 'Kitty', 'Sabrina', # Sales
+    'Enrique', 'Justin', 'Bobby', 'Ericka' # Support
+]
+
 layout = [
     [True,  True,  True,  True,  True,  True,  True],
     [True,  True,  True,  True,  True,  True,  False],
