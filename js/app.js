@@ -11,6 +11,7 @@ $(function() {
     var layout = []
     var employees = []
     var tags = []
+    var employeeTags = {}
 
     var clearLayout = function() {
 
@@ -51,11 +52,25 @@ $(function() {
         $tbody = $('tbody', $employeeTable)
         $tbody.empty()
         _.each(employees, function(employee) {
-            var $tr = $(
-                '<tr>' +
-                    '<td>' + employee + '</td>' +
-                '</tr>'
-            )
+
+            var $tr = $('<tr>')
+            $tr.data('employee-name', employee)
+
+            var $select = $('<select>')
+            $select.append('<option disabled selected value>Select a tag</option>')
+            var options = _.map(tags, function(tag) {
+                var isSelected = employeeTags[employee] == tag
+                return $('<option value="' + tag +'">' + tag + '</option>')
+            })
+            var currentEmployeeTag = employeeTags[employee]
+            $select.val(currentEmployeeTag)
+            $select.append(options)
+
+            var $selectTd = $('<td>')
+            $selectTd.append($select)
+            
+            $tr.append('<td>' + employee + '</td>')
+            $tr.append($selectTd)
             $tbody.append($tr)
         })
     }
@@ -85,6 +100,14 @@ $(function() {
         updateSelectionUI()
     })
 
+    $(document).on('change', '#employee-table select', function() {
+        var $tr = $(this).closest('tr')
+        var employeeName = $tr.data('employee-name')
+        employeeTags[employeeName] = $(this).val()
+        debugger
+        console.log(employeeTags)
+    })
+
     $employeeForm.submit(function(ev) {
         ev.preventDefault()
         $nameInput = $('#employee-name-input', this)
@@ -111,5 +134,6 @@ $(function() {
         tags.push(tag)
         $tagInput.val('')
         updateTagTable()
+        updateEmployeeTable()
     })
 })
