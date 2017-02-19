@@ -1,24 +1,29 @@
-.App {
-  text-align: center;
+#layout-table {
+    border: 1px solid #bdc3c7;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+#layout-table td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    user-select: none;
+    cursor: default;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+#layout-table tr:nth-child(2n) td:nth-child(2n+1) {
+    background-color: #ecf0f1;
 }
 
-.App-intro {
-  font-size: large;
+#layout-table tr:nth-child(2n+1) td:nth-child(2n) {
+    background-color: #ecf0f1;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#layout-table td:hover {
+    background-color: #95a5a6 !important;
+    color: white;
+}
+
+#layout-table td.selected {
+    background-color: #3498db !important;
+    color: white;
 }

@@ -16,4 +16,4 @@ class SettingsContainer extends Component {
   }
 }
 
-export default SettingsContainer
+module.exports = SettingsContainer
