@@ -3,6 +3,7 @@ const _ = require('lodash')
 let mainReducer = function(state, action) {
 
   switch (action.type) {
+
   case 'SET_NUM_ROWS': {
     const numCols = state.layout.length > 0 ? state.layout[0].length : 0
     const layout = _.map(_.range(action.numRows), function() {
@@ -14,6 +15,7 @@ let mainReducer = function(state, action) {
       layout: layout
     })
   }
+
   case 'SET_NUM_COLS': {
     const numRows = state.layout.length
     const layout = _.map(_.range(numRows), function() {
@@ -25,6 +27,11 @@ let mainReducer = function(state, action) {
       layout: layout
     })
   }
+
+  case 'ADD_EMPLOYEE':
+    return _.assign({}, state, {
+      employeeNames: [...state.employeeNames, action.employeeName]
+    })
   }
 
   return _.assign({}, state)

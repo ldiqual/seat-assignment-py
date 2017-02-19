@@ -12,7 +12,15 @@ function setNumCols(numCols) {
   }
 }
 
+function addEmployee(employeeName) {
+  return {
+    type: 'ADD_EMPLOYEE',
+    employeeName: employeeName
+  }
+}
+
 export {
   setNumRows,
-  setNumCols
+  setNumCols,
+  addEmployee,
 }

@@ -17,12 +17,12 @@ let initialLayout = _.map(_.range(10), function() {
 
 let initialState = {
     layout: initialLayout,
-    employees: [],
+    employeeNames: [],
     tags: [],
     employeeTags: {},
 }
 
-let store = Redux.createStore(mainReducer, initialState)
+let store = Redux.createStore(mainReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(
   <Provider store={ store }>
