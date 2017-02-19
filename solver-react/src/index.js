@@ -7,7 +7,6 @@ const _ = require('lodash')
 require('./index.css')
 const App = require('./App')
 const mainReducer = require('./reducers')
-const Actions = require('./actions')
 
 let initialLayout = _.map(_.range(10), function() {
   return _.map(_.range(10), function() {

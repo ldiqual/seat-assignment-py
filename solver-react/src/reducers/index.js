@@ -32,9 +32,15 @@ let mainReducer = function(state, action) {
     return _.assign({}, state, {
       employeeNames: [...state.employeeNames, action.employeeName]
     })
-  }
 
-  return _.assign({}, state)
+  case 'ADD_TAG':
+    return _.assign({}, state, {
+      tags: [...state.tags, action.tag]
+    })
+
+  default:
+    return _.assign({}, state)
+  }
 }
 
 module.exports = mainReducer

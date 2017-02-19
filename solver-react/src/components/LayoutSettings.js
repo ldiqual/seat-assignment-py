@@ -7,12 +7,12 @@ const Actions = require('../actions')
 class LayoutSettings extends React.Component {
 
   setNumRows = (event) => {
-    const numRows = parseInt(event.target.value)
+    const numRows = parseInt(event.target.value, 10)
     this.props.dispatch(Actions.setNumRows(numRows))
   }
 
   setNumCols = (event) => {
-    const numCols = parseInt(event.target.value)
+    const numCols = parseInt(event.target.value, 10)
     this.props.dispatch(Actions.setNumCols(numCols))
   }
 

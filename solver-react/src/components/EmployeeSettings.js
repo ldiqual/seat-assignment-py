@@ -15,7 +15,7 @@ class EmployeeSettings extends React.Component {
     event.preventDefault()
 
     const employeeName = this.state.employeeName
-    if (!employeeName || employeeName.length == 0) {
+    if (!employeeName || employeeName.length === 0) {
       return
     }
 
@@ -24,7 +24,7 @@ class EmployeeSettings extends React.Component {
 
   setEmployeeName = (event) => {
     const employeeName = event.target.value
-    this.state.employeeName = employeeName
+    this.setState({ employeeName: employeeName })
   }
 
   render() {
@@ -34,7 +34,7 @@ class EmployeeSettings extends React.Component {
       const employeeTag = this.props.employeeTags[employeeName]
 
       const tagOptions = _.map(this.props.tags, (tag) => {
-        <option value={ employeeTag } key={ employeeTag }>{ tag }</option>
+        return <option value={ employeeTag } key={ employeeTag }>{ tag }</option>
       })
 
       const cols = [

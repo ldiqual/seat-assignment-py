@@ -19,8 +19,16 @@ function addEmployee(employeeName) {
   }
 }
 
+function addTag(tag) {
+  return {
+    type: 'ADD_TAG',
+    tag: tag
+  }
+}
+
 export {
   setNumRows,
   setNumCols,
   addEmployee,
+  addTag,
 }

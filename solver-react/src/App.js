@@ -5,7 +5,6 @@ const _ = require('lodash')
 import SettingsContainer from './components/SettingsContainer'
 import LayoutTableContainer from './components/LayoutTableContainer'
 
-import logo from './logo.svg';
 import './App.css';
 
 class App extends React.Component {
