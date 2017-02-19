@@ -1,7 +1,7 @@
-// src/reducers/index.js
-import cart from './cart';
-import { combineReducers } from 'redux';
-const rootReducer = combineReducers({
-    cart
-});
-export default rootReducer;
+const _ = require('lodash')
+
+let mainReducer = function(state, action) {
+  return _.assign({}, state)
+}
+
+module.exports = mainReducer
