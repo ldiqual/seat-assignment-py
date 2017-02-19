@@ -32,15 +32,20 @@ class EmployeeSettings extends React.Component {
     const employeeRows = _.map(this.props.employeeNames, (employeeName) => {
 
       const employeeTag = this.props.employeeTags[employeeName]
+      const setEmployeeTag = (event) => {
+        let tag = event.target.value
+        console.log('here')
+        this.props.dispatch(Actions.setEmployeeTag(employeeName, tag))
+      }
 
       const tagOptions = _.map(this.props.tags, (tag) => {
-        return <option value={ employeeTag } key={ employeeTag }>{ tag }</option>
+        return <option value={ employeeTag } key={ tag }>{ tag }</option>
       })
 
       const cols = [
         <td key="name">{ employeeName }</td>,
         <td key="tag">
-          <select value={ employeeTag }>
+          <select value={ employeeTag } onChange={ setEmployeeTag }>
             <option disabled selected value>Select a tag</option>
             { tagOptions }
           </select>

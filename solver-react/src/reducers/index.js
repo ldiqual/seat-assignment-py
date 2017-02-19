@@ -38,6 +38,13 @@ let mainReducer = function(state, action) {
       tags: [...state.tags, action.tag]
     })
 
+  case 'SET_EMPLOYEE_TAG':
+    const newEmployeeTags = _.assign({}, state.employeeTags)
+    newEmployeeTags[action.employeeName] = action.tag
+    return _.assign({}, state, {
+      employeeTags: newEmployeeTags
+    })
+
   default:
     return _.assign({}, state)
   }
