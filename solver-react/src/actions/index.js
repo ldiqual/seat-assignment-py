@@ -34,10 +34,20 @@ function setEmployeeTag(employeeName, tag) {
   }
 }
 
+function setLocationHasTable(rowIndex, colIndex, hasTable) {
+  return {
+    type: 'SET_LOCATION_HAS_TABLE',
+    rowIndex: rowIndex,
+    colIndex: colIndex,
+    hasTable: hasTable
+  }
+}
+
 export {
   setNumRows,
   setNumCols,
   addEmployee,
   addTag,
   setEmployeeTag,
+  setLocationHasTable,
 }

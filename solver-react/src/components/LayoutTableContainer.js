@@ -2,13 +2,18 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const _ = require('lodash')
 
+const Actions = require('../actions')
+
 class LayoutTableContainer extends React.Component {
 
   render() {
 
-    const rows = _.map(this.props.layout, function(row, rowIndex) {
-      const cols = _.map(row, function(hasTable, colIndex) {
-        return <td key={ colIndex } className={ hasTable ? 'selected' : '' }></td>
+    const rows = _.map(this.props.layout, (row, rowIndex) => {
+      const cols = _.map(row, (hasTable, colIndex) => {
+        const onClick = () => {
+          this.props.dispatch(Actions.setLocationHasTable(rowIndex, colIndex, !hasTable))
+        }
+        return <td key={ colIndex } className={ hasTable ? 'selected' : '' } onClick={ onClick }></td>
       })
       return <tr key={ rowIndex }>{ cols }</tr>
     })

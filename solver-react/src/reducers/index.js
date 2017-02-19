@@ -45,6 +45,13 @@ let mainReducer = function(state, action) {
       employeeTags: newEmployeeTags
     })
 
+  case 'SET_LOCATION_HAS_TABLE':
+    const layout = _.cloneDeep(state.layout)
+    layout[action.rowIndex][action.colIndex] = action.hasTable
+    return _.assign({}, state, {
+      layout: layout
+    })
+
   default:
     return _.assign({}, state)
   }
