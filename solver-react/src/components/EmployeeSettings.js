@@ -34,7 +34,6 @@ class EmployeeSettings extends React.Component {
       const employeeTag = this.props.employeeTags[employeeName]
       const setEmployeeTag = (event) => {
         let tag = event.target.value
-        console.log('here')
         this.props.dispatch(Actions.setEmployeeTag(employeeName, tag))
       }
 

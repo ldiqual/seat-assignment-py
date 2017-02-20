@@ -43,6 +43,29 @@ function setLocationHasTable(rowIndex, colIndex, hasTable) {
   }
 }
 
+function setIsAssigningTags(isAssigningTags) {
+  return {
+    type: 'SET_IS_ASSIGNING_TAGS',
+    isAssigningTags: isAssigningTags
+  }
+}
+
+function setCurrentTagBeingAssigned(tag) {
+  return {
+    type: 'SET_CURRENT_TAG_BEING_ASSIGNED',
+    tag: tag
+  }
+}
+
+function toggleTagForTable(rowIndex, colIndex, tag) {
+  return {
+    type: 'TOGGLE_TAG_FOR_TABLE',
+    rowIndex: rowIndex,
+    colIndex: colIndex,
+    tag: tag
+  }
+}
+
 export {
   setNumRows,
   setNumCols,
@@ -50,4 +73,7 @@ export {
   addTag,
   setEmployeeTag,
   setLocationHasTable,
+  setIsAssigningTags,
+  setCurrentTagBeingAssigned,
+  toggleTagForTable,
 }

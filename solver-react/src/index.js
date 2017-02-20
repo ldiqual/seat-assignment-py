@@ -14,14 +14,27 @@ let initialLayout = _.map(_.range(10), function() {
   })
 })
 
+let initialTableTags = _.map(_.range(10), function() {
+  return _.map(_.range(10), function() {
+    return []
+  })
+})
+
 let initialState = {
     layout: initialLayout,
     employeeNames: [],
     tags: [],
     employeeTags: {},
+    tableTags: initialTableTags,
+    isAssigningTags: false,
+    currentTagBeingAssigned: null
 }
 
-let store = Redux.createStore(mainReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+let store = Redux.createStore(
+  mainReducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
   <Provider store={ store }>

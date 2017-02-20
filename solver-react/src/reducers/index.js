@@ -11,8 +11,14 @@ let mainReducer = function(state, action) {
         return false
       })
     })
+    const tableTags = _.map(_.range(action.numRows), function() {
+      return _.map(_.range(numCols), function() {
+        return []
+      })
+    })
     return _.assign({}, state, {
-      layout: layout
+      layout: layout,
+      tableTags: tableTags
     })
   }
 
@@ -23,8 +29,14 @@ let mainReducer = function(state, action) {
         return false
       })
     })
+    const tableTags = _.map(_.range(numRows), function() {
+      return _.map(_.range(action.numCols), function() {
+        return []
+      })
+    })
     return _.assign({}, state, {
-      layout: layout
+      layout: layout,
+      tableTags: tableTags
     })
   }
 
@@ -45,11 +57,37 @@ let mainReducer = function(state, action) {
       employeeTags: newEmployeeTags
     })
 
-  case 'SET_LOCATION_HAS_TABLE':
+  case 'SET_LOCATION_HAS_TABLE': {
     const layout = _.cloneDeep(state.layout)
     layout[action.rowIndex][action.colIndex] = action.hasTable
+    const tableTags = _.cloneDeep(state.tableTags)
+    tableTags[action.rowIndex][action.colIndex] = []
     return _.assign({}, state, {
-      layout: layout
+      layout: layout,
+      tableTags: tableTags
+    })
+  }
+
+  case 'SET_IS_ASSIGNING_TAGS':
+    return _.assign({}, state, {
+      isAssigningTags: action.isAssigningTags,
+      currentTagBeingAssigned: state.tags[0]
+    })
+
+  case 'SET_CURRENT_TAG_BEING_ASSIGNED':
+    return _.assign({}, state, {
+      currentTagBeingAssigned: action.tag
+    })
+
+  case 'TOGGLE_TAG_FOR_TABLE':
+    const tags = state.tableTags[action.rowIndex][action.colIndex]
+    const tableAlreadyHasThisTag = _.includes(tags, action.tag)
+    const tableTags = _.cloneDeep(state.tableTags)
+    tableTags[action.rowIndex][action.colIndex] = tableAlreadyHasThisTag
+      ? _.without(tags, action.tag)
+      : _.concat(tags, action.tag)
+    return _.assign({}, state, {
+      tableTags: tableTags
     })
 
   default:

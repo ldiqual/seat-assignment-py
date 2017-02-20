@@ -27,3 +27,9 @@
     background-color: #3498db !important;
     color: white;
 }
+
+#tag-assignment-selector span {
+  margin-right: 10px;
+  user-select: none;
+  cursor: pointer;
+}
