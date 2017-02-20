@@ -90,3 +90,9 @@
 #employee-table td {
   vertical-align: middle;
 }
+
+/* Distance constraint */
+
+#distance-constraint-table label {
+  margin-right:10px;
+}

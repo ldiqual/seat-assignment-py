@@ -59,14 +59,14 @@ class DistanceConstraintSettings extends React.Component {
     })
 
     const employee1Select = (
-      <select value={ this.state.employee1Name } onChange={ this.setEmployee1Name } className="form-control">
+      <select id="employee1-name-input" value={ this.state.employee1Name } onChange={ this.setEmployee1Name } className="form-control">
         <option value=''>Employee 1</option>
         { employeeOptions }
       </select>
     )
 
     const employee2Select = (
-      <select value={ this.state.employee2Name } onChange={ this.setEmployee2Name } className="form-control">
+      <select id="employee2-name-input" value={ this.state.employee2Name } onChange={ this.setEmployee2Name } className="form-control">
         <option value=''>Employee 2</option>
         { employeeOptions }
       </select>
@@ -87,13 +87,27 @@ class DistanceConstraintSettings extends React.Component {
       <div>
         <h3>Distance Constraints</h3>
 
-        <form id="distance-constraint-form" onSubmit={ this.handleSubmit } className="form-horizontal">
+        <p>
+          You can restrict the distance between two employees by adding a distance constraint.<br/>
+          Two adjacent tables have a distance of 1.
+        </p>
+
+        <form id="distance-constraint-form" onSubmit={ this.handleSubmit } className="form-inline">
           <table id="distance-constraint-table" className="table table-striped">
             <tbody>
               <tr>
-                <td>{ employee1Select }</td>
-                <td>{ employee2Select }</td>
-                <td><input type="number" className="form-control" id="employee-name-input" onChange={ this.setDistance } value={ this.state.distance } placeholder="1" /></td>
+                <td>
+                  <label htmlFor="employee1-name-input" className="sr-only">Employee 1</label>
+                  { employee1Select }
+                </td>
+                <td>
+                  <label htmlFor="employee1-name-input" className="sr-only">Employee 2</label>
+                  { employee2Select }
+                </td>
+                <td>
+                  <label htmlFor="distance-input">Distance</label>
+                  <input id="distance-input" type="number" className="form-control" onChange={ this.setDistance } value={ this.state.distance } placeholder="1" />
+                </td>
                 <td><button type="submit" className="btn btn-default">Add</button></td>
               </tr>
               { constraintRows }
