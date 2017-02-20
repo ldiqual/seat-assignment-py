@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const uuid = require('uuid/v4')
 
 let mainReducer = function(state, action) {
 
@@ -93,6 +94,18 @@ let mainReducer = function(state, action) {
       : _.concat(tags, action.tag)
     return _.assign({}, state, {
       tableTags: tableTags
+    })
+
+  case 'ADD_DISTANCE_CONSTRAINT':
+    const distanceConstraints = _.clone(state.distanceConstraints)
+    distanceConstraints.push({
+      id: uuid(),
+      employee1Name: action.employee1Name,
+      employee2Name: action.employee2Name,
+      distance: action.distance,
+    })
+    return _.assign({}, state, {
+      distanceConstraints: distanceConstraints
     })
 
   default:

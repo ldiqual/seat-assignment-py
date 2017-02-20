@@ -66,6 +66,15 @@ function toggleTagForTable(rowIndex, colIndex, tag) {
   }
 }
 
+function addDistanceConstraint(employee1Name, employee2Name, distance) {
+  return {
+    type: 'ADD_DISTANCE_CONSTRAINT',
+    employee1Name: employee1Name,
+    employee2Name: employee2Name,
+    distance: distance
+  }
+}
+
 export {
   setNumRows,
   setNumCols,
@@ -76,4 +85,5 @@ export {
   setIsAssigningTags,
   setCurrentTagBeingAssigned,
   toggleTagForTable,
+  addDistanceConstraint,
 }

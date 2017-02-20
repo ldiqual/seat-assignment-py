@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EmployeeSettings from './EmployeeSettings'
 import LayoutSettings from './LayoutSettings'
 import TagSettings from './TagSettings'
+import DistanceConstraintSettings from './DistanceConstraintSettings'
 
 class SettingsContainer extends Component {
   render() {
@@ -11,6 +12,7 @@ class SettingsContainer extends Component {
           <LayoutSettings />
           <EmployeeSettings />
           <TagSettings />
+          <DistanceConstraintSettings />
       </div>
     )
   }

@@ -27,7 +27,8 @@ let initialState = {
     employeeTags: {},
     tableTags: initialTableTags,
     isAssigningTags: false,
-    currentTagBeingAssigned: null
+    currentTagBeingAssigned: null,
+    distanceConstraints: [],
 }
 
 let store = Redux.createStore(

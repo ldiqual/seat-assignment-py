@@ -21,6 +21,10 @@ class EmployeeSettings extends React.Component {
       return
     }
 
+    if (_.includes(this.props.employeeNames, employeeName)) {
+      return
+    }
+
     this.setState({ employeeName: '' })
     this.props.dispatch(Actions.addEmployee(employeeName))
   }
@@ -47,7 +51,7 @@ class EmployeeSettings extends React.Component {
       const cols = [
         <td key="name">{ employeeName }</td>,
         <td key="tag">
-          <select value={ employeeTag } onChange={ setEmployeeTag }>
+          <select value={ employeeTag } onChange={ setEmployeeTag } className="form-control">
             <option disabled selected value>Select a tag</option>
             { tagOptions }
           </select>
