@@ -3,6 +3,7 @@ const ReactDOM = require('react-dom')
 const Provider = require('react-redux').Provider
 const Redux = require('redux')
 const _ = require('lodash')
+const thunk = require('redux-thunk').default
 
 require('./index.css')
 const App = require('./App')
@@ -27,12 +28,18 @@ let initialState = {
     employeeTags: {},
     tableTags: initialTableTags,
     distanceConstraints: [],
+    solverState: {
+      state: 'idle'
+    }
 }
 
 let store = Redux.createStore(
   mainReducer,
   initialState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  Redux.compose(
+    Redux.applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 )
 
 window.store = store

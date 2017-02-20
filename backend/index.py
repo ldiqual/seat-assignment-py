@@ -1,12 +1,17 @@
 from flask import Flask, request, jsonify
 from cerberus import Validator
+from flask_cors import cross_origin, CORS
 
 from problem import SeatingProblem
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route("/solve", methods=['POST'])
+@app.route("/solve", methods=['POST', 'OPTIONS'])
 def solve():
+    if request.method == 'OPTIONS':
+        return ''
+
     json = request.get_json()
 
     schema = {

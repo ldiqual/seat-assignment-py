@@ -1,3 +1,6 @@
+const axios = require('axios')
+const _ = require('lodash')
+
 function setNumRows(numRows) {
   return {
     type: 'SET_NUM_ROWS',
@@ -75,6 +78,47 @@ function addDistanceConstraint(employee1Name, employee2Name, distance) {
   }
 }
 
+function solve() {
+  return (dispatch, getState) => {
+
+    const state = _.pick(getState(), [
+      'layout',
+      'employeeNames',
+      'employeeTags',
+      'tableTags',
+      'distanceConstraints'
+    ])
+
+    dispatch({
+      type: 'SET_SOLVER_STATE',
+      state: 'loading'
+    })
+
+    axios.post('http://localhost:5000/solve', state)
+    .then(result => {
+      if (!result.data.success) {
+        dispatch({
+          type: 'SET_SOLVER_STATE',
+          state: 'failed'
+        })
+        return
+      }
+
+      dispatch({
+        type: 'SET_SOLVER_STATE',
+        state: 'succeeded',
+        assignments: result.data.assignments
+      })
+    })
+    .catch(error => {
+      dispatch({
+        type: 'SET_SOLVER_STATE',
+        state: 'failed'
+      })
+    })
+  }
+}
+
 export {
   setNumRows,
   setNumCols,
@@ -86,4 +130,5 @@ export {
   setCurrentTagBeingAssigned,
   toggleTagForTable,
   addDistanceConstraint,
+  solve
 }

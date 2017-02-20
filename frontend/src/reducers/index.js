@@ -108,6 +108,25 @@ let mainReducer = function(state, action) {
       distanceConstraints: distanceConstraints
     })
 
+  case 'SET_SOLVER_STATE':
+    switch (action.state) {
+    case 'loading':
+      return _.assign({}, state, {
+        solverState: { state: 'loading' }
+      })
+    case 'succeeded':
+      return _.assign({}, state, {
+        solverState: {
+          state: 'succeeded',
+          assignments: action.assignments
+        }
+      })
+    case 'failed':
+      return _.assign({}, state, {
+        solverState: { state: 'failed' }
+      })
+    }
+
   default:
     return _.assign({}, state)
   }
