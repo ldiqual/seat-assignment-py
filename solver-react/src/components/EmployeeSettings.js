@@ -71,7 +71,7 @@ class EmployeeSettings extends React.Component {
     }
 
     return (
-      <div>
+      <div id="employee-container">
         <h2>Employees</h2>
 
         <p>Add members of your company and indicate the team they belong to.</p>

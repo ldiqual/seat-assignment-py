@@ -13,6 +13,10 @@
 
 /* Layout table */
 
+#layout-container {
+  padding-bottom: 50px;
+}
+
 #layout-table {
     border-collapse: separate;
     border-spacing: 2px;
@@ -45,7 +49,27 @@
     color: white;
 }
 
+/* Tags */
+
+#tag-container {
+  padding-bottom: 50px;
+}
+
+/* Employees */
+
+#employee-container {
+  padding-bottom: 50px;
+}
+
+#employee-table td {
+  vertical-align: middle;
+}
+
 /* Tag table */
+
+#table-tag-container {
+  padding-bottom: 50px;
+}
 
 #table-tag-table {
     border-collapse: separate;
@@ -85,19 +109,21 @@
   cursor: pointer;
 }
 
-/* Employee table */
-
-#employee-table td {
-  vertical-align: middle;
-}
-
 /* Distance constraint */
+
+#distance-constraint-container {
+  padding-bottom: 50px;
+}
 
 #distance-constraint-table label {
   margin-right:10px;
 }
 
 /* Summary */
+
+#summary-container {
+  padding-bottom: 50px;
+}
 
 #summary-table {
     border-collapse: separate;
@@ -124,4 +150,8 @@
 #summary-table td.selected {
     background-color: #9b59b6 !important;
     color: white;
+}
+
+#result-container {
+  padding-bottom: 50px;
 }

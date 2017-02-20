@@ -32,7 +32,7 @@ class LayoutTableContainer extends React.Component {
     const numCols = numRows > 0 ? this.props.layout[0].length : 0
 
     return (
-      <div id="table-container">
+      <div id="layout-container">
         <h2>Table layout</h2>
 
         <p>First, define how your workspace is laid out by clicking on the cells where tables are placed.</p>

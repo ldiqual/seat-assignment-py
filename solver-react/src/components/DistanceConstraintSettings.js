@@ -84,8 +84,8 @@ class DistanceConstraintSettings extends React.Component {
     })
 
     return (
-      <div>
-        <h3>Distance Constraints</h3>
+      <div id="distance-constraint-container">
+        <h2>Distance Constraints</h2>
 
         <p>
           You can restrict the distance between two employees by adding a distance constraint.<br/>

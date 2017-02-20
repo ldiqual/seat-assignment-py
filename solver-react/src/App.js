@@ -8,6 +8,7 @@ import TagSettings from './components/TagSettings'
 import TableTagSettings from './components/TableTagSettings'
 import DistanceConstraintSettings from './components/DistanceConstraintSettings'
 import SummaryContainer from './components/SummaryContainer'
+import ResultContainer from './components/ResultContainer'
 
 import './App.css';
 
@@ -36,6 +37,9 @@ class App extends React.Component {
         </div>
         <div className="row">
           <SummaryContainer/>
+        </div>
+        <div className="row">
+          <ResultContainer/>
         </div>
       </div>
     );
