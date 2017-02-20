@@ -8,7 +8,9 @@ class TagSettings extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      tag: ''
+    }
   }
 
   handleSubmit = (event) => {
@@ -23,6 +25,7 @@ class TagSettings extends React.Component {
       return
     }
 
+    this.setState({ tag: '' })
     this.props.dispatch(Actions.addTag(tag))
   }
 
@@ -37,28 +40,39 @@ class TagSettings extends React.Component {
 
   render() {
 
-    const tagRows = _.map(this.props.tags, (tag) => {
-      return (
-        <tr key={ tag }>
-          <td>{ tag }</td>
+    let tagRows = null
+
+    if (this.props.tags.length > 0) {
+      tagRows = _.map(this.props.tags, (tag) => {
+        return (
+          <tr key={ tag }>
+            <td>{ tag }</td>
+          </tr>
+        )
+      })
+    } else {
+      tagRows = [
+        <tr key="-1">
+          <td>–</td>
         </tr>
-      )
-    })
+      ]
+    }
 
     const isAssigningTags = this.props.isAssigningTags
 
     return (
       <div>
         <h3>Tags</h3>
-        <form id="tag-form" onSubmit={ this.handleSubmit } className="form-inline">
+        <form id="tag-form" onSubmit={ this.handleSubmit } className="form-horizontal">
           <div className="form-group">
-            <label htmlFor="tag-input">Tag</label>
-            <input type="text" className="form-control" id="tag-input" onChange={ this.setTagName } placeholder="Engineering" />
+            <label htmlFor="tag-input" className="col-sm-2 control-label">Tag</label>
+            <div className="col-sm-10">
+              <input type="text" className="form-control" id="tag-input" onChange={ this.setTagName } value={ this.state.tag } placeholder="Engineering" />
+            </div>
           </div>
-          <button type="submit" className="btn btn-default">Add</button>
         </form>
 
-        <table id="tag-table" className="table">
+        <table id="tag-table" className="table table-striped">
           <tbody>{ tagRows }</tbody>
         </table>
 

@@ -8,7 +8,9 @@ class EmployeeSettings extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      employeeName: ''
+    }
   }
 
   handleSubmit = (event) => {
@@ -19,6 +21,7 @@ class EmployeeSettings extends React.Component {
       return
     }
 
+    this.setState({ employeeName: '' })
     this.props.dispatch(Actions.addEmployee(employeeName))
   }
 
@@ -29,7 +32,7 @@ class EmployeeSettings extends React.Component {
 
   render() {
 
-    const employeeRows = _.map(this.props.employeeNames, (employeeName) => {
+    var employeeRows = _.map(this.props.employeeNames, (employeeName) => {
 
       const employeeTag = this.props.employeeTags[employeeName]
       const setEmployeeTag = (event) => {
@@ -38,7 +41,7 @@ class EmployeeSettings extends React.Component {
       }
 
       const tagOptions = _.map(this.props.tags, (tag) => {
-        return <option value={ employeeTag } key={ tag }>{ tag }</option>
+        return <option value={ tag } key={ tag }>{ tag }</option>
       })
 
       const cols = [
@@ -54,18 +57,29 @@ class EmployeeSettings extends React.Component {
       return <tr key={ employeeName }>{ cols }</tr>
     })
 
+    if (this.props.employeeNames.length == 0) {
+      employeeRows = [
+        <tr key="-1">
+          <td key="name">–</td>
+          <td key="tag"></td>
+        </tr>
+      ]
+    }
+
     return (
       <div>
         <h3>Employees</h3>
-        <form id="employee-form" onSubmit={ this.handleSubmit } className="form-inline">
+
+        <form id="employee-form" onSubmit={ this.handleSubmit } className="form-horizontal">
           <div className="form-group">
-            <label htmlFor="employee-name-input">Name</label>
-            <input type="text" className="form-control" id="employee-name-input" onChange={ this.setEmployeeName } placeholder="Jane Doe" />
+            <label htmlFor="employee-name-input" className="col-sm-2 control-label">Name</label>
+            <div className="col-sm-10">
+              <input type="text" className="form-control" id="employee-name-input" onChange={ this.setEmployeeName } value={ this.state.employeeName } placeholder="Jane Doe" />
+            </div>
           </div>
-          <button type="submit" className="btn btn-default">Add</button>
         </form>
 
-        <table id="employee-table" className="table">
+        <table id="employee-table" className="table table-striped">
           <tbody>{ employeeRows }</tbody>
         </table>
       </div>
