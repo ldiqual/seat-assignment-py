@@ -55,7 +55,7 @@ class TagSettings extends React.Component {
 
     return (
       <div>
-        <h3>Teams</h3>
+        <h2>Teams</h2>
 
         <p>Add teams that take part of your workplace. Examples: "Engineering", "Sales", or "Marketing".</p>
 

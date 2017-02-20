@@ -11,6 +11,8 @@
   margin-bottom: 10px;
 }
 
+/* Layout table */
+
 #layout-table {
     border-collapse: separate;
     border-spacing: 2px;
@@ -22,6 +24,7 @@
     text-align: center;
     user-select: none;
     cursor: default;
+    padding: 5px;
 }
 
 #layout-table tr:nth-child(2n) td:nth-child(2n+1) {
@@ -42,8 +45,48 @@
     color: white;
 }
 
+/* Tag table */
+
+#table-tag-table {
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
+#table-tag-table td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    user-select: none;
+    cursor: default;
+    padding: 5px;
+}
+
+#table-tag-table tr:nth-child(2n) td:nth-child(2n+1) {
+    background-color: #ecf0f1;
+}
+
+#table-tag-table tr:nth-child(2n+1) td:nth-child(2n) {
+    background-color: #ecf0f1;
+}
+
+#table-tag-table td:hover {
+    background-color: #95a5a6 !important;
+    color: white;
+}
+
+#table-tag-table td.selected {
+    background-color: #2ecc71 !important;
+    color: white;
+}
+
 #tag-assignment-selector button {
   margin-right: 10px;
   user-select: none;
   cursor: pointer;
+}
+
+/* Employee table */
+
+#employee-table td {
+  vertical-align: middle;
 }

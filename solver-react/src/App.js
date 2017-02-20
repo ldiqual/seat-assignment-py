@@ -2,10 +2,10 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const _ = require('lodash')
 
-import SettingsContainer from './components/SettingsContainer'
 import LayoutTableContainer from './components/LayoutTableContainer'
 import EmployeeSettings from './components/EmployeeSettings'
 import TagSettings from './components/TagSettings'
+import TableTagSettings from './components/TableTagSettings'
 import DistanceConstraintSettings from './components/DistanceConstraintSettings'
 
 import './App.css';
@@ -26,6 +26,9 @@ class App extends React.Component {
         </div>
         <div className="row">
           <EmployeeSettings/>
+        </div>
+        <div className="row">
+          <TableTagSettings/>
         </div>
         <div className="row">
           <DistanceConstraintSettings/>

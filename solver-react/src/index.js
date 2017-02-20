@@ -26,8 +26,6 @@ let initialState = {
     tags: [],
     employeeTags: {},
     tableTags: initialTableTags,
-    isAssigningTags: false,
-    currentTagBeingAssigned: null,
     distanceConstraints: [],
 }
 
