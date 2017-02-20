@@ -4,16 +4,31 @@ const _ = require('lodash')
 
 import SettingsContainer from './components/SettingsContainer'
 import LayoutTableContainer from './components/LayoutTableContainer'
+import EmployeeSettings from './components/EmployeeSettings'
+import TagSettings from './components/TagSettings'
+import DistanceConstraintSettings from './components/DistanceConstraintSettings'
 
 import './App.css';
 
 class App extends React.Component {
   render() {
     return (
-      <div className="container-fluid">
+      <div id="app-container" className="container">
+        <div className="row">
+          <h1>Seat assignment solver</h1>
+          <p className="lead">Using linear constraints and a LP/MIP solver</p>
+        </div>
         <div className="row">
           <LayoutTableContainer/>
-          <SettingsContainer/>
+        </div>
+        <div className="row">
+          <TagSettings/>
+        </div>
+        <div className="row">
+          <EmployeeSettings/>
+        </div>
+        <div className="row">
+          <DistanceConstraintSettings/>
         </div>
       </div>
     );

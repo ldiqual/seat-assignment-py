@@ -1,5 +1,14 @@
-#table-container ul.nav {
-  margin-bottom: 15px
+#app-container {
+  max-width:768px;
+}
+
+#layout-form input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#layout-form {
+  margin-bottom: 10px;
 }
 
 #layout-table {

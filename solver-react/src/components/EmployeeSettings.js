@@ -52,7 +52,7 @@ class EmployeeSettings extends React.Component {
         <td key="name">{ employeeName }</td>,
         <td key="tag">
           <select value={ employeeTag } onChange={ setEmployeeTag } className="form-control">
-            <option disabled selected value>Select a tag</option>
+            <option disabled selected value>Select a team</option>
             { tagOptions }
           </select>
         </td>
@@ -72,7 +72,9 @@ class EmployeeSettings extends React.Component {
 
     return (
       <div>
-        <h3>Employees</h3>
+        <h2>Employees</h2>
+
+        <p>Add members of your company and indicate the team they belong to.</p>
 
         <form id="employee-form" onSubmit={ this.handleSubmit } className="form-horizontal">
           <div className="form-group">

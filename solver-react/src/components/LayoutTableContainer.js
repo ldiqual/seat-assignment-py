@@ -6,12 +6,14 @@ const Actions = require('../actions')
 
 class LayoutTableContainer extends React.Component {
 
-  onLayoutTabClicked = () => {
-    this.props.dispatch(Actions.setIsAssigningTags(false))
+  setNumRows = (event) => {
+    const numRows = parseInt(event.target.value, 10)
+    this.props.dispatch(Actions.setNumRows(numRows))
   }
 
-  onTagTabClicked = () => {
-    this.props.dispatch(Actions.setIsAssigningTags(true))
+  setNumCols = (event) => {
+    const numCols = parseInt(event.target.value, 10)
+    this.props.dispatch(Actions.setNumCols(numCols))
   }
 
   render() {
@@ -19,52 +21,32 @@ class LayoutTableContainer extends React.Component {
     const rows = _.map(this.props.layout, (row, rowIndex) => {
       const cols = _.map(row, (hasTable, colIndex) => {
         const onClick = () => {
-          if (this.props.isAssigningTags) {
-            if (!this.props.layout[rowIndex][colIndex]) {
-              return
-            }
-            this.props.dispatch(Actions.toggleTagForTable(rowIndex, colIndex, this.props.currentTagBeingAssigned))
-          } else {
-            this.props.dispatch(Actions.setLocationHasTable(rowIndex, colIndex, !hasTable))
-          }
+          this.props.dispatch(Actions.setLocationHasTable(rowIndex, colIndex, !hasTable))
         }
-        const tags = this.props.tableTags[rowIndex][colIndex]
-        const td = (
-          <td key={ colIndex } className={ hasTable ? 'selected' : '' } onClick={ onClick }>
-            { tags.join('\n') }
-          </td>
-        )
-        return td
+        return <td key={ colIndex } className={ hasTable ? 'selected' : '' } onClick={ onClick }></td>
       })
       return <tr key={ rowIndex }>{ cols }</tr>
     })
 
-    let tags = _.map(this.props.tags, (tag) => {
-      const setCurrentTagBeingAssigned = () => {
-        this.props.dispatch(Actions.setCurrentTagBeingAssigned(tag))
-      }
-      const classes = ['btn', 'btn-sm', this.props.currentTagBeingAssigned === tag ? 'btn-primary' : 'btn-default']
-      return <button key={ tag } onClick={ setCurrentTagBeingAssigned } className={ classes.join(' ') }>{ tag }</button>
-    })
-
-    if (this.props.tags.length === 0) {
-      tags = (
-        <p>
-          <span>No tags to show. Please add tags from the right menu</span>
-        </p>
-      )
-    }
+    const numRows = this.props.layout.length
+    const numCols = numRows > 0 ? this.props.layout[0].length : 0
 
     return (
-      <div id="table-container" className="col-xs-7">
+      <div id="table-container">
         <h2>Table layout</h2>
 
-        <ul className="nav nav-tabs">
-          <li role="presentation" className={ this.props.isAssigningTags ? '' : 'active' }><a href="#" onClick={ this.onLayoutTabClicked }>Layout</a></li>
-          <li role="presentation" className={ this.props.isAssigningTags ? 'active' : '' }><a href="#" onClick={ this.onTagTabClicked }>Tags</a></li>
-        </ul>
+        <p>First, define how your workspace is laid out by clicking on the cells where tables are placed.</p>
 
-        { this.props.isAssigningTags ? <p id="tag-assignment-selector">{ tags }</p> : '' }
+        <form id="layout-form" className="form-inline">
+          <div className="form-group">
+            <label htmlFor="rows-input">Rows</label>
+            <input type="number" className="form-control" id="rows-input" value={ numRows } onChange={ this.setNumRows } placeholder="0" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="cols-input">Cols</label>
+            <input type="number" className="form-control" id="cols-input" value={ numCols } onChange={ this.setNumCols } placeholder="0" />
+          </div>
+        </form>
 
         <table id="layout-table">
           <tbody>
@@ -78,11 +60,7 @@ class LayoutTableContainer extends React.Component {
 
 const mapStateToProps = function(state) {
   return {
-    layout: state.layout,
-    tags: state.tags,
-    currentTagBeingAssigned: state.currentTagBeingAssigned,
-    isAssigningTags: state.isAssigningTags,
-    tableTags: state.tableTags,
+    layout: state.layout
   }
 }
 

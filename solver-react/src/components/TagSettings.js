@@ -55,10 +55,13 @@ class TagSettings extends React.Component {
 
     return (
       <div>
-        <h3>Tags</h3>
+        <h3>Teams</h3>
+
+        <p>Add teams that take part of your workplace. Examples: "Engineering", "Sales", or "Marketing".</p>
+
         <form id="tag-form" onSubmit={ this.handleSubmit } className="form-horizontal">
           <div className="form-group">
-            <label htmlFor="tag-input" className="col-sm-2 control-label">Tag</label>
+            <label htmlFor="tag-input" className="col-sm-2 control-label">Team</label>
             <div className="col-sm-10">
               <input type="text" className="form-control" id="tag-input" onChange={ this.setTagName } value={ this.state.tag } placeholder="Engineering" />
             </div>
