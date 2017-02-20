@@ -6,6 +6,14 @@ const Actions = require('../actions')
 
 class LayoutTableContainer extends React.Component {
 
+  onLayoutTabClicked = () => {
+    this.props.dispatch(Actions.setIsAssigningTags(false))
+  }
+
+  onTagTabClicked = () => {
+    this.props.dispatch(Actions.setIsAssigningTags(true))
+  }
+
   render() {
 
     const rows = _.map(this.props.layout, (row, rowIndex) => {
@@ -31,17 +39,30 @@ class LayoutTableContainer extends React.Component {
       return <tr key={ rowIndex }>{ cols }</tr>
     })
 
-    const tags = _.map(this.props.tags, (tag) => {
+    let tags = _.map(this.props.tags, (tag) => {
       const setCurrentTagBeingAssigned = () => {
         this.props.dispatch(Actions.setCurrentTagBeingAssigned(tag))
       }
-      const classes = ['label', this.props.currentTagBeingAssigned === tag ? 'label-primary' : 'label-default']
-      return <span key={ tag } onClick={ setCurrentTagBeingAssigned } className={ classes.join(' ') }>{ tag }</span>
+      const classes = ['btn', 'btn-sm', this.props.currentTagBeingAssigned === tag ? 'btn-primary' : 'btn-default']
+      return <button key={ tag } onClick={ setCurrentTagBeingAssigned } className={ classes.join(' ') }>{ tag }</button>
     })
+
+    if (this.props.tags.length === 0) {
+      tags = (
+        <p>
+          <span>No tags to show. Please add tags from the right menu</span>
+        </p>
+      )
+    }
 
     return (
       <div id="table-container" className="col-xs-7">
         <h2>Table layout</h2>
+
+        <ul className="nav nav-tabs">
+          <li role="presentation" className={ this.props.isAssigningTags ? '' : 'active' }><a href="#" onClick={ this.onLayoutTabClicked }>Layout</a></li>
+          <li role="presentation" className={ this.props.isAssigningTags ? 'active' : '' }><a href="#" onClick={ this.onTagTabClicked }>Tags</a></li>
+        </ul>
 
         { this.props.isAssigningTags ? <p id="tag-assignment-selector">{ tags }</p> : '' }
 

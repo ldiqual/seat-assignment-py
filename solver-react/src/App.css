@@ -1,3 +1,7 @@
+#table-container ul.nav {
+  margin-bottom: 15px
+}
+
 #layout-table {
     border: 1px solid #bdc3c7;
 }
@@ -28,7 +32,7 @@
     color: white;
 }
 
-#tag-assignment-selector span {
+#tag-assignment-selector button {
   margin-right: 10px;
   user-select: none;
   cursor: pointer;

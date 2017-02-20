@@ -33,11 +33,6 @@ class TagSettings extends React.Component {
     this.setState({ tag: event.target.value })
   }
 
-  toggleIsAssigningTags = (event) => {
-    const isAssigningTags = this.props.isAssigningTags
-    this.props.dispatch(Actions.setIsAssigningTags(!isAssigningTags))
-  }
-
   render() {
 
     let tagRows = null
@@ -58,8 +53,6 @@ class TagSettings extends React.Component {
       ]
     }
 
-    const isAssigningTags = this.props.isAssigningTags
-
     return (
       <div>
         <h3>Tags</h3>
@@ -75,10 +68,6 @@ class TagSettings extends React.Component {
         <table id="tag-table" className="table table-striped">
           <tbody>{ tagRows }</tbody>
         </table>
-
-        <button onClick={ this.toggleIsAssigningTags } className={ isAssigningTags ? 'btn btn-warning' : 'btn btn-default' }>
-          { isAssigningTags ? 'Stop assigning tags' : 'Start assigning tags' }
-        </button>
       </div>
     )
   }
@@ -86,8 +75,7 @@ class TagSettings extends React.Component {
 
 const mapStateToProps = function(state) {
   return {
-    tags: state.tags,
-    isAssigningTags: state.isAssigningTags
+    tags: state.tags
   }
 }
 

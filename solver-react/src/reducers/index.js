@@ -46,8 +46,13 @@ let mainReducer = function(state, action) {
     })
 
   case 'ADD_TAG':
+    let currentTagBeingAssigned = state.currentTagBeingAssigned
+    if (!currentTagBeingAssigned && state.isAssigningTags) {
+      currentTagBeingAssigned = action.tag
+    }
     return _.assign({}, state, {
-      tags: [...state.tags, action.tag]
+      tags: [...state.tags, action.tag],
+      currentTagBeingAssigned: currentTagBeingAssigned
     })
 
   case 'SET_EMPLOYEE_TAG':
