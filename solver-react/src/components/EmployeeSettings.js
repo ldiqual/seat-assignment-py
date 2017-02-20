@@ -57,7 +57,7 @@ class EmployeeSettings extends React.Component {
       return <tr key={ employeeName }>{ cols }</tr>
     })
 
-    if (this.props.employeeNames.length == 0) {
+    if (this.props.employeeNames.length === 0) {
       employeeRows = [
         <tr key="-1">
           <td key="name">–</td>
