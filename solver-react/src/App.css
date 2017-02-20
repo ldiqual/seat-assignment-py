@@ -3,7 +3,8 @@
 }
 
 #layout-table {
-    border: 1px solid #bdc3c7;
+    border-collapse: separate;
+    border-spacing: 2px;
 }
 
 #layout-table td {
