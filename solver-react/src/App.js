@@ -7,6 +7,7 @@ import EmployeeSettings from './components/EmployeeSettings'
 import TagSettings from './components/TagSettings'
 import TableTagSettings from './components/TableTagSettings'
 import DistanceConstraintSettings from './components/DistanceConstraintSettings'
+import SummaryContainer from './components/SummaryContainer'
 
 import './App.css';
 
@@ -32,6 +33,9 @@ class App extends React.Component {
         </div>
         <div className="row">
           <DistanceConstraintSettings/>
+        </div>
+        <div className="row">
+          <SummaryContainer/>
         </div>
       </div>
     );
