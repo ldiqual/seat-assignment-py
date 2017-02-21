@@ -23,8 +23,8 @@ class ResultContainer extends React.Component {
       const assignments = this.props.solverState.assignments
       const rows = _.map(assignments, (row, rowIndex) => {
         const cols = _.map(row, (employeeName, colIndex) => {
-          const hasTable = employeeName !== '-'
-          return <td key={ colIndex } className={ hasTable ? 'selected' : '' }>{ employeeName }</td>
+          const hasTable = this.props.layout[rowIndex][colIndex]
+          return <td key={ colIndex } className={ hasTable ? 'selected' : '' }>{ employeeName || '' }</td>
         })
         return <tr key={ rowIndex }>{ cols }</tr>
       })
@@ -38,15 +38,21 @@ class ResultContainer extends React.Component {
       )
     }
 
+    let error
+    if (this.props.solverState.state == 'failed') {
+      error = <span id="result-error" className="text-danger">We couldn't find an optimal seat layout given the data you provided.</span>
+    }
+
     return (
       <div id="result-container">
-      <p>
-        <button type="button" onClick={ this.solve } className={ buttonClasses.join(' ') }>
-          { span } { isLoading ? 'Solving...' : 'Solve this!' }
-        </button>
-      </p>
+        <p>
+          <button type="button" onClick={ this.solve } className={ buttonClasses.join(' ') }>
+            { span } { isLoading ? 'Solving...' : 'Solve this!' }
+          </button>
+          { error }
+        </p>
 
-      { table }
+        { table }
 
       </div>
     )

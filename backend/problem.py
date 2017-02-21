@@ -183,12 +183,12 @@ class SeatingProblem:
             for col in range(self.num_cols):
 
                 if not self.layout[row][col]:
-                    assignments[row][col] = '-'
+                    assignments[row][col] = None
                     continue
 
                 employee_index = self.get_employee_index_assigned_to_table(row, col)
                 if employee_index == None:
-                    assignments[row][col] = '-'
+                    assignments[row][col] = None
                     continue
 
                 employee_name = self.employees[employee_index]

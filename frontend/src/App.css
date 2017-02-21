@@ -185,8 +185,12 @@
 }
 
 #result-table td.selected {
-    background-color: #9b59b6 !important;
+    background-color: #34495e !important;
     color: white;
+}
+
+#result-error {
+  margin-left: 10px;
 }
 
 /* Spinning. See http://stackoverflow.com/a/26283602 */
