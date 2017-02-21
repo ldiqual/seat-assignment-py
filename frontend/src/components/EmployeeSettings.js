@@ -70,6 +70,23 @@ class EmployeeSettings extends React.Component {
       ]
     }
 
+    const errors = []
+    _.each(this.props.employeeNames, (employeeName) => {
+      const tag = this.props.employeeTags[employeeName]
+      if (!tag) {
+        errors.push(<li>Please select a team for <b>{ employeeName }</b></li>)
+      }
+    })
+
+    let errorParagraph
+    if (errors.length > 0) {
+      errorParagraph = <p>
+        <ul className="text-danger">
+          { errors }
+        </ul>
+      </p>
+    }
+
     return (
       <div id="employee-container">
         <h2>Employees</h2>
@@ -84,6 +101,8 @@ class EmployeeSettings extends React.Component {
             </div>
           </div>
         </form>
+
+        { errorParagraph }
 
         <table id="employee-table" className="table table-striped">
           <tbody>{ employeeRows }</tbody>

@@ -60,6 +60,32 @@ class TableTagSettings extends React.Component {
       tagParagraph = <p>You didn't add a team yet. Please do so in the section above.</p>
     }
 
+    const errors = []
+    _.each(this.props.tags, (tag) => {
+      const allTableTags = _.flatten(this.props.tableTags)
+      const tableCountForTag = _.reduce(allTableTags, (sum, tags) => {
+        return _.includes(tags, tag) ? sum + 1 : sum
+      }, 0)
+      const employeeCountForTag = _.reduce(this.props.employeeTags, (sum, employeeTag) => {
+        return employeeTag === tag ? sum + 1 : sum
+      }, 0)
+      debugger
+      if (tableCountForTag < employeeCountForTag) {
+        errors.push(<li>
+          There are <b>{ employeeCountForTag }</b> employees in the <b>{ tag }</b> team but only <b>{ tableCountForTag }</b> tables are tagged with this team.
+        </li>)
+      }
+    })
+
+    let errorParagraph
+    if (errors.length > 0) {
+      errorParagraph = <p>
+        <ul className="text-danger">
+          { errors }
+        </ul>
+      </p>
+    }
+
     return (
       <div id="table-tag-container">
         <h2>Table teams</h2>
@@ -67,6 +93,7 @@ class TableTagSettings extends React.Component {
         <p>Assign tables to specific teams by selecting a team and clicking on the tables that belong to that team. A table can belong to multiple teams.</p>
 
         { tagParagraph }
+        { errorParagraph }
 
         <table id="table-tag-table">
           <tbody>
@@ -83,6 +110,7 @@ const mapStateToProps = function(state) {
     layout: state.layout,
     tags: state.tags,
     tableTags: state.tableTags,
+    employeeTags: state.employeeTags,
   }
 }
 
