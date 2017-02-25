@@ -45,7 +45,10 @@
 }
 
 #layout-table td.selected {
-    background-color: #3498db !important;
+    background-image: url(images/table.png);
+    background-size: 75%, 75%, contain;
+    background-position: center;
+    background-repeat: no-repeat;
     color: white;
 }
 
