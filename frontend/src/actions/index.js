@@ -94,7 +94,11 @@ function solve() {
       state: 'loading'
     })
 
-    axios.post('http://localhost:5000/solve', state)
+    let url = process.env.NODE_ENV === 'production'
+      ? 'https://table-seating-solver-api.herokuapp.com/solve'
+      : 'http://localhost:5000/solve'
+
+    axios.post(url, state)
     .then(result => {
       if (!result.data.success) {
         dispatch({
