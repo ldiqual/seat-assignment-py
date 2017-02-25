@@ -2,8 +2,6 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const _ = require('lodash')
 
-const Actions = require('../actions')
-
 class SummaryContainer extends React.Component {
 
   render() {

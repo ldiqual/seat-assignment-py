@@ -125,6 +125,8 @@ let mainReducer = function(state, action) {
       return _.assign({}, state, {
         solverState: { state: 'failed' }
       })
+    default:
+      return;
     }
 
   default:

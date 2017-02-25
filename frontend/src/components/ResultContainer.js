@@ -39,7 +39,7 @@ class ResultContainer extends React.Component {
     }
 
     let error
-    if (this.props.solverState.state == 'failed') {
+    if (this.props.solverState.state === 'failed') {
       error = <span id="result-error" className="text-danger">We couldn't find an optimal seat layout given the data you provided.</span>
     }
 
