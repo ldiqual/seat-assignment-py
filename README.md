@@ -32,7 +32,7 @@ Deploy
 ```
 heroku login
 git remote add heroku-api https://git.heroku.com/table-seating-solver-api.git
-git remote add herokuhttps://git.heroku.com/table-seating-solver.git
+git remote add heroku https://git.heroku.com/table-seating-solver.git
 ```
 
 ### Backend
