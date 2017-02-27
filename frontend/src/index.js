@@ -14,7 +14,7 @@ const mainReducer = require('./reducers')
 const composeMiddlewares = () => {
   const middlewares = [
     Redux.applyMiddleware(thunk),
-    autoRehydrate({log: true})
+    autoRehydrate()
   ]
   if (window.__REDUX_DEVTOOLS_EXTENSION__) {
     middlewares.push(window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -28,8 +28,7 @@ let store = Redux.createStore(
   composeMiddlewares()
 )
 
-const persistor = persistStore(store)
-persistor.purge()
+persistStore(store)
 window.store = store
 
 ReactDOM.render(
