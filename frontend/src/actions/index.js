@@ -130,6 +130,13 @@ function deleteEmployee(employeeName) {
   }
 }
 
+function deleteTag(tag) {
+  return {
+    type: 'DELETE_TAG',
+    tag: tag
+  }
+}
+
 export {
   setNumRows,
   setNumCols,
@@ -142,5 +149,6 @@ export {
   toggleTagForTable,
   addDistanceConstraint,
   solve,
-  deleteEmployee
+  deleteEmployee,
+  deleteTag,
 }

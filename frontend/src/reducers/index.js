@@ -41,12 +41,13 @@ let mainReducer = function(state, action) {
     })
   }
 
-  case 'ADD_EMPLOYEE':
+  case 'ADD_EMPLOYEE': {
     return _.assign({}, state, {
       employeeNames: [...state.employeeNames, action.employeeName]
     })
+  }
 
-  case 'ADD_TAG':
+  case 'ADD_TAG': {
     let currentTagBeingAssigned = state.currentTagBeingAssigned
     if (!currentTagBeingAssigned && state.isAssigningTags) {
       currentTagBeingAssigned = action.tag
@@ -55,13 +56,15 @@ let mainReducer = function(state, action) {
       tags: [...state.tags, action.tag],
       currentTagBeingAssigned: currentTagBeingAssigned
     })
+  }
 
-  case 'SET_EMPLOYEE_TAG':
+  case 'SET_EMPLOYEE_TAG': {
     const newEmployeeTags = _.assign({}, state.employeeTags)
     newEmployeeTags[action.employeeName] = action.tag
     return _.assign({}, state, {
       employeeTags: newEmployeeTags
     })
+  }
 
   case 'SET_LOCATION_HAS_TABLE': {
     const layout = _.cloneDeep(state.layout)
@@ -74,18 +77,20 @@ let mainReducer = function(state, action) {
     })
   }
 
-  case 'SET_IS_ASSIGNING_TAGS':
+  case 'SET_IS_ASSIGNING_TAGS': {
     return _.assign({}, state, {
       isAssigningTags: action.isAssigningTags,
       currentTagBeingAssigned: state.tags[0]
     })
+  }
 
-  case 'SET_CURRENT_TAG_BEING_ASSIGNED':
+  case 'SET_CURRENT_TAG_BEING_ASSIGNED': {
     return _.assign({}, state, {
       currentTagBeingAssigned: action.tag
     })
+  }
 
-  case 'TOGGLE_TAG_FOR_TABLE':
+  case 'TOGGLE_TAG_FOR_TABLE': {
     const tags = state.tableTags[action.rowIndex][action.colIndex]
     const tableAlreadyHasThisTag = _.includes(tags, action.tag)
     const tableTags = _.cloneDeep(state.tableTags)
@@ -95,6 +100,7 @@ let mainReducer = function(state, action) {
     return _.assign({}, state, {
       tableTags: tableTags
     })
+  }
 
   case 'ADD_DISTANCE_CONSTRAINT': {
     const distanceConstraints = _.clone(state.distanceConstraints)
@@ -109,7 +115,7 @@ let mainReducer = function(state, action) {
     })
   }
 
-  case 'SET_SOLVER_STATE':
+  case 'SET_SOLVER_STATE': {
     switch (action.state) {
     case 'loading':
       return _.assign({}, state, {
@@ -129,8 +135,9 @@ let mainReducer = function(state, action) {
     default:
       return;
     }
+  }
 
-  case 'DELETE_EMPLOYEE':
+  case 'DELETE_EMPLOYEE': {
     const employeeNames = _.without(state.employeeNames, action.employeeName)
     const employeeTags = _.omit(state.employeeTags, action.employeeName)
     const distanceConstraints = _.reject(state.distanceConstraints, (constraint) => {
@@ -142,6 +149,23 @@ let mainReducer = function(state, action) {
       employeeTags: employeeTags,
       distanceConstraints: distanceConstraints
     })
+  }
+
+  case 'DELETE_TAG': {
+    const tags = _.without(state.tags, action.tag)
+    const tableTags = _.cloneDeep(state.tableTags)
+    _.each(tableTags, (row) => {
+      _.each(row, (tags) => {
+        _.pull(tags, action.tag)
+      })
+    })
+    const employeeTags = _.omitBy(state.employeeTags, value => value === action.tag)
+    return _.assign({}, state, {
+      tags: tags,
+      tableTags: tableTags,
+      employeeTags: employeeTags
+    })
+  }
 
   default:
     return _.assign({}, state)

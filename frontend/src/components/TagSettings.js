@@ -39,9 +39,19 @@ class TagSettings extends React.Component {
 
     if (this.props.tags.length > 0) {
       tagRows = _.map(this.props.tags, (tag) => {
+
+        const deleteTag = (event) => {
+          this.props.dispatch(Actions.deleteTag(tag))
+        }
+
         return (
           <tr key={ tag }>
-            <td>{ tag }</td>
+            <td key="actions">
+              <button type="button" className="btn btn-danger btn-xs" onClick={ deleteTag }>
+                <span className="glyphicon glyphicon-remove"></span>
+              </button>
+            </td>
+            <td key="tag">{ tag }</td>
           </tr>
         )
       })
