@@ -6,18 +6,31 @@ let mainReducer = function(state, action) {
   switch (action.type) {
 
   case 'SET_NUM_ROWS': {
-    const numRows = action.payload
+
+    const currentNumRows = state.layout.length = state.layout.length
     const numCols = state.layout.length > 0 ? state.layout[0].length : 0
-    const layout = _.map(_.range(numRows), function() {
-      return _.map(_.range(numCols), function() {
-        return false
+    const numRows = action.payload
+
+    let layout
+    if (numRows <= currentNumRows) {
+      layout = _.take(state.layout, numRows)
+    } else {
+      layout = _.cloneDeep(state.layout)
+      _.each(_.range(numRows - currentNumRows), () => {
+        layout.push(_.fill(Array(numCols), false))
       })
-    })
-    const tableTags = _.map(_.range(numRows), function() {
-      return _.map(_.range(numCols), function() {
-        return []
+    }
+
+    let tableTags
+    if (numRows <= currentNumRows) {
+      tableTags = _.take(state.tableTags, numRows)
+    } else {
+      tableTags = _.cloneDeep(state.tableTags)
+      _.each(_.range(numRows - currentNumRows), () => {
+        tableTags.push(_.fill(_.map(Array(numCols), () => [])))
       })
-    })
+    }
+
     return _.assign({}, state, {
       layout: layout,
       tableTags: tableTags
@@ -27,16 +40,38 @@ let mainReducer = function(state, action) {
   case 'SET_NUM_COLS': {
     const numRows = state.layout.length
     const numCols = action.payload
-    const layout = _.map(_.range(numRows), function() {
-      return _.map(_.range(numCols), function() {
-        return false
+    const currentNumCols = state.layout.length > 0 ? state.layout[0].length : 0
+
+    let layout
+    if (numCols <= currentNumCols) {
+      layout = _.map(state.layout, (row) => {
+        return _.take(row, numCols)
       })
-    })
-    const tableTags = _.map(_.range(numRows), function() {
-      return _.map(_.range(numCols), function() {
-        return []
+    } else {
+      layout = _.map(state.layout, (row) => {
+        let newRow = _.cloneDeep(row)
+        _.each(_.range(numCols - currentNumCols), () => {
+          newRow.push(false)
+        })
+        return newRow
       })
-    })
+    }
+
+    let tableTags
+    if (numCols <= currentNumCols) {
+      tableTags = _.map(state.tableTags, (row) => {
+        return _.take(row, numCols)
+      })
+    } else {
+      tableTags = _.map(state.tableTags, (row) => {
+        let newRow = _.cloneDeep(row)
+        _.each(_.range(numCols - currentNumCols), () => {
+          newRow.push([])
+        })
+        return newRow
+      })
+    }
+
     return _.assign({}, state, {
       layout: layout,
       tableTags: tableTags

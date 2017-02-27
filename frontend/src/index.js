@@ -14,7 +14,7 @@ const mainReducer = require('./reducers')
 const composeMiddlewares = () => {
   const middlewares = [
     Redux.applyMiddleware(thunk),
-    autoRehydrate()
+    autoRehydrate({log: true})
   ]
   if (window.__REDUX_DEVTOOLS_EXTENSION__) {
     middlewares.push(window.__REDUX_DEVTOOLS_EXTENSION__())
