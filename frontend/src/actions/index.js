@@ -27,6 +27,7 @@ const addDistanceConstraint = createAction('ADD_DISTANCE_CONSTRAINT', (employee1
 })
 
 const deleteDistanceConstraint = createAction('DELETE_DISTANCE_CONSTRAINT', constraint => constraint.id)
+const reset = createAction('RESET')
 
 function solve() {
   return (dispatch, getState) => {
@@ -86,4 +87,5 @@ export {
   deleteEmployee,
   deleteTag,
   deleteDistanceConstraint,
+  reset
 }

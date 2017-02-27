@@ -204,6 +204,10 @@
   margin-left: 10px;
 }
 
+#result-actions button {
+  margin-right: 10px
+}
+
 /* Spinning. See http://stackoverflow.com/a/26283602 */
 
 .glyphicon.spinning {

@@ -172,8 +172,39 @@ let mainReducer = function(state, action) {
     })
   }
 
+  case 'RESET': {
+    return mainReducer.initialState()
+  }
+
   default:
     return _.assign({}, state)
+  }
+}
+
+mainReducer.initialState = function() {
+
+  const initialLayout = _.map(_.range(10), function() {
+    return _.map(_.range(10), function() {
+      return false
+    })
+  })
+
+  const initialTableTags = _.map(_.range(10), function() {
+    return _.map(_.range(10), function() {
+      return []
+    })
+  })
+
+  return {
+      layout: initialLayout,
+      employeeNames: [],
+      tags: [],
+      employeeTags: {},
+      tableTags: initialTableTags,
+      distanceConstraints: [],
+      solverState: {
+        state: 'idle'
+      }
   }
 }
 

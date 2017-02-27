@@ -10,6 +10,10 @@ class ResultContainer extends React.Component {
     this.props.dispatch(Actions.solve())
   }
 
+  reset = () => {
+    this.props.dispatch(Actions.reset())
+  }
+
   render() {
 
     let isLoading = this.props.solverState.state === 'loading'
@@ -45,9 +49,12 @@ class ResultContainer extends React.Component {
 
     return (
       <div id="result-container">
-        <p>
+        <p id="result-actions">
           <button type="button" onClick={ this.solve } className={ buttonClasses.join(' ') }>
             { span } { isLoading ? 'Solving...' : 'Solve this!' }
+          </button>
+          <button type="button" onClick={ this.reset } className="btn btn-danger">
+            <span className="glyphicon glyphicon-repeat"></span> Start over
           </button>
           { error }
         </p>

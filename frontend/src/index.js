@@ -4,37 +4,18 @@ const Provider = require('react-redux').Provider
 const Redux = require('redux')
 const _ = require('lodash')
 const thunk = require('redux-thunk').default
+const persistStore = require('redux-persist').persistStore
+const autoRehydrate = require('redux-persist').autoRehydrate
 
 require('./index.css')
 const App = require('./App')
 const mainReducer = require('./reducers')
 
-let initialLayout = _.map(_.range(10), function() {
-  return _.map(_.range(10), function() {
-    return false
-  })
-})
-
-let initialTableTags = _.map(_.range(10), function() {
-  return _.map(_.range(10), function() {
-    return []
-  })
-})
-
-let initialState = {
-    layout: initialLayout,
-    employeeNames: [],
-    tags: [],
-    employeeTags: {},
-    tableTags: initialTableTags,
-    distanceConstraints: [],
-    solverState: {
-      state: 'idle'
-    }
-}
-
 const composeMiddlewares = () => {
-  const middlewares = [ Redux.applyMiddleware(thunk) ]
+  const middlewares = [
+    Redux.applyMiddleware(thunk),
+    autoRehydrate()
+  ]
   if (window.__REDUX_DEVTOOLS_EXTENSION__) {
     middlewares.push(window.__REDUX_DEVTOOLS_EXTENSION__())
   }
@@ -43,10 +24,11 @@ const composeMiddlewares = () => {
 
 let store = Redux.createStore(
   mainReducer,
-  initialState,
+  mainReducer.initialState(),
   composeMiddlewares()
 )
 
+persistStore(store)
 window.store = store
 
 ReactDOM.render(
