@@ -78,11 +78,11 @@ class TableTagSettings extends React.Component {
 
     let errorParagraph
     if (errors.length > 0) {
-      errorParagraph = <p>
+      errorParagraph = (
         <ul className="text-danger">
           { errors }
         </ul>
-      </p>
+      )
     }
 
     return (

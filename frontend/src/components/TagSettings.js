@@ -46,12 +46,12 @@ class TagSettings extends React.Component {
 
         return (
           <tr key={ tag }>
-            <td key="actions">
+            <td key="actions" className="shrink">
               <button type="button" className="btn btn-danger btn-xs" onClick={ deleteTag }>
                 <span className="glyphicon glyphicon-remove"></span>
               </button>
             </td>
-            <td key="tag">{ tag }</td>
+            <td key="tag"  className="expand">{ tag }</td>
           </tr>
         )
       })

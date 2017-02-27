@@ -53,13 +53,13 @@ class EmployeeSettings extends React.Component {
       })
 
       const cols = [
-        <td key="actions">
+        <td key="actions" className="shrink">
           <button type="button" className="btn btn-danger btn-xs" onClick={ deleteEmployee }>
             <span className="glyphicon glyphicon-remove"></span>
           </button>
         </td>,
-        <td key="name">{ employeeName }</td>,
-        <td key="tag">
+        <td key="name" className="shrink">{ employeeName }</td>,
+        <td key="tag" className="expand">
           <select value={ employeeTag } onChange={ setEmployeeTag } className="form-control">
             <option disabled selected value>Select a team</option>
             { tagOptions }

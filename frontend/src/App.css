@@ -1,3 +1,11 @@
+.shrink {
+  white-space:nowrap
+}
+
+.expand {
+  width: 99%
+}
+
 #app-container {
   max-width:768px;
 }
