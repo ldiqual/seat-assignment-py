@@ -73,8 +73,18 @@ class DistanceConstraintSettings extends React.Component {
     )
 
     const constraintRows = _.map(this.props.distanceConstraints, (constraint) => {
+
+      const deleteConstraint = (event) => {
+        this.props.dispatch(Actions.deleteDistanceConstraint(constraint))
+      }
+
       return (
         <tr key={ constraint.id }>
+          <td key="actions">
+            <button type="button" className="btn btn-danger btn-xs" onClick={ deleteConstraint }>
+              <span className="glyphicon glyphicon-remove"></span>
+            </button>
+          </td>
           <td key="employee1Name">{ constraint.employee1Name }</td>
           <td key="employee2Name">{ constraint.employee2Name }</td>
           <td key="constraint">{ constraint.distance }</td>

@@ -167,6 +167,13 @@ let mainReducer = function(state, action) {
     })
   }
 
+  case 'DELETE_DISTANCE_CONSTRAINT': {
+    const constraints = _.reject(state.distanceConstraints, constraint => constraint.id === action.constraintId)
+    return _.assign({}, state, {
+      distanceConstraints: constraints
+    })
+  }
+
   default:
     return _.assign({}, state)
   }

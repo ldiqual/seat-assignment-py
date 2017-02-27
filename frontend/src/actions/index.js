@@ -137,6 +137,13 @@ function deleteTag(tag) {
   }
 }
 
+function deleteDistanceConstraint(constraint) {
+  return {
+    type: 'DELETE_DISTANCE_CONSTRAINT',
+    constraintId: constraint.id
+  }
+}
+
 export {
   setNumRows,
   setNumCols,
@@ -151,4 +158,5 @@ export {
   solve,
   deleteEmployee,
   deleteTag,
+  deleteDistanceConstraint,
 }
