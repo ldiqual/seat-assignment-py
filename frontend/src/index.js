@@ -28,7 +28,8 @@ let store = Redux.createStore(
   composeMiddlewares()
 )
 
-persistStore(store)
+const persistor = persistStore(store)
+persistor.purge()
 window.store = store
 
 ReactDOM.render(

@@ -15,20 +15,18 @@ let mainReducer = function(state, action) {
     if (numRows <= currentNumRows) {
       layout = _.take(state.layout, numRows)
     } else {
-      layout = _.cloneDeep(state.layout)
-      _.each(_.range(numRows - currentNumRows), () => {
-        layout.push(_.fill(Array(numCols), false))
-      })
+      const oldLayout = _.cloneDeep(state.layout)
+      const newRows = _.times(numRows - currentNumRows, () => _.times(numCols, () => false))
+      layout = _.concat(oldLayout, newRows)
     }
 
     let tableTags
     if (numRows <= currentNumRows) {
       tableTags = _.take(state.tableTags, numRows)
     } else {
-      tableTags = _.cloneDeep(state.tableTags)
-      _.each(_.range(numRows - currentNumRows), () => {
-        tableTags.push(_.fill(_.map(Array(numCols), () => [])))
-      })
+      const oldTableTags = _.cloneDeep(state.tableTags)
+      const newRows = _.times(numRows - currentNumRows, () => _.times(numCols, () => []))
+      tableTags = _.concat(oldTableTags, newRows)
     }
 
     return _.assign({}, state, {
@@ -218,17 +216,8 @@ let mainReducer = function(state, action) {
 
 mainReducer.initialState = function() {
 
-  const initialLayout = _.map(_.range(10), function() {
-    return _.map(_.range(10), function() {
-      return false
-    })
-  })
-
-  const initialTableTags = _.map(_.range(10), function() {
-    return _.map(_.range(10), function() {
-      return []
-    })
-  })
+  const initialLayout = _.times(10, () => _.times(10, () => false))
+  const initialTableTags = _.times(10, () => _.times(10, () => []))
 
   return {
       layout: initialLayout,
