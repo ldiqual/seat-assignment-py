@@ -42,31 +42,23 @@ let mainReducer = function(state, action) {
 
     let layout
     if (numCols <= currentNumCols) {
-      layout = _.map(state.layout, (row) => {
-        return _.take(row, numCols)
-      })
+      layout = _.map(state.layout, (row) => _.take(row, numCols))
     } else {
       layout = _.map(state.layout, (row) => {
-        let newRow = _.cloneDeep(row)
-        _.each(_.range(numCols - currentNumCols), () => {
-          newRow.push(false)
-        })
-        return newRow
+        let oldCols = _.cloneDeep(row)
+        let newCols = _.times(numCols - currentNumCols, () => false)
+        return _.concat(oldCols, newCols)
       })
     }
 
     let tableTags
     if (numCols <= currentNumCols) {
-      tableTags = _.map(state.tableTags, (row) => {
-        return _.take(row, numCols)
-      })
+      tableTags = _.map(state.tableTags, (row) => _.take(row, numCols))
     } else {
       tableTags = _.map(state.tableTags, (row) => {
-        let newRow = _.cloneDeep(row)
-        _.each(_.range(numCols - currentNumCols), () => {
-          newRow.push([])
-        })
-        return newRow
+        let oldCols = _.cloneDeep(row)
+        let newCols = _.times(numCols - currentNumCols, () => [])
+        return _.concat(oldCols, newCols)
       })
     }
 
@@ -78,21 +70,12 @@ let mainReducer = function(state, action) {
 
   case 'ADD_EMPLOYEE': {
     const employeeName = action.payload
-    return _.assign({}, state, {
-      employeeNames: [...state.employeeNames, employeeName]
-    })
+    return {...state, employeeNames: [...state.employeeNames, employeeName]}
   }
 
   case 'ADD_TAG': {
     const tag = action.payload
-    let currentTagBeingAssigned = state.currentTagBeingAssigned
-    if (!currentTagBeingAssigned && state.isAssigningTags) {
-      currentTagBeingAssigned = tag
-    }
-    return _.assign({}, state, {
-      tags: [...state.tags, tag],
-      currentTagBeingAssigned: currentTagBeingAssigned
-    })
+    return {...state, tags: [...state.tags, tag]}
   }
 
   case 'SET_EMPLOYEE_TAG': {
