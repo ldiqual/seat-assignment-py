@@ -33,13 +33,18 @@ let initialState = {
     }
 }
 
+const composeMiddlewares = () => {
+  const middlewares = [ Redux.applyMiddleware(thunk) ]
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+    middlewares.push(window.__REDUX_DEVTOOLS_EXTENSION__())
+  }
+  return Redux.compose.apply(Redux.compose, middlewares)
+}
+
 let store = Redux.createStore(
   mainReducer,
   initialState,
-  Redux.compose(
-    Redux.applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  composeMiddlewares()
 )
 
 window.store = store
