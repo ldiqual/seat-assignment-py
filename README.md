@@ -13,7 +13,7 @@ Run
 ```
 cd backend
 virtualenv .venv
-source .venv/bin/active
+source .venv/bin/activate
 pip install -r requirements.txt
 python app.py
 ```
