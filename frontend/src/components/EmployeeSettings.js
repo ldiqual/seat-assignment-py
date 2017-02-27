@@ -44,11 +44,20 @@ class EmployeeSettings extends React.Component {
         this.props.dispatch(Actions.setEmployeeTag(employeeName, tag))
       }
 
+      const deleteEmployee = (event) => {
+        this.props.dispatch(Actions.deleteEmployee(employeeName))
+      }
+
       const tagOptions = _.map(this.props.tags, (tag) => {
         return <option value={ tag } key={ tag }>{ tag }</option>
       })
 
       const cols = [
+        <td key="actions">
+          <button type="button" className="btn btn-danger btn-xs" onClick={ deleteEmployee }>
+            <span className="glyphicon glyphicon-remove"></span>
+          </button>
+        </td>,
         <td key="name">{ employeeName }</td>,
         <td key="tag">
           <select value={ employeeTag } onChange={ setEmployeeTag } className="form-control">
@@ -64,7 +73,8 @@ class EmployeeSettings extends React.Component {
     if (this.props.employeeNames.length === 0) {
       employeeRows = [
         <tr key="-1">
-          <td key="name">–</td>
+          <td key="actions">–</td>
+          <td key="name"></td>
           <td key="tag"></td>
         </tr>
       ]
@@ -74,17 +84,17 @@ class EmployeeSettings extends React.Component {
     _.each(this.props.employeeNames, (employeeName) => {
       const tag = this.props.employeeTags[employeeName]
       if (!tag) {
-        errors.push(<li>Please select a team for <b>{ employeeName }</b></li>)
+        errors.push(<li key={ `tag_${ employeeName }` }>Please select a team for <b>{ employeeName }</b></li>)
       }
     })
 
     let errorParagraph
     if (errors.length > 0) {
-      errorParagraph = <p>
+      errorParagraph = (
         <ul className="text-danger">
           { errors }
         </ul>
-      </p>
+      )
     }
 
     return (

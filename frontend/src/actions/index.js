@@ -123,6 +123,13 @@ function solve() {
   }
 }
 
+function deleteEmployee(employeeName) {
+  return {
+    type: 'DELETE_EMPLOYEE',
+    employeeName: employeeName
+  }
+}
+
 export {
   setNumRows,
   setNumCols,
@@ -134,5 +141,6 @@ export {
   setCurrentTagBeingAssigned,
   toggleTagForTable,
   addDistanceConstraint,
-  solve
+  solve,
+  deleteEmployee
 }

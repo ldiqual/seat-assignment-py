@@ -70,7 +70,7 @@ class TableTagSettings extends React.Component {
         return employeeTag === tag ? sum + 1 : sum
       }, 0)
       if (tableCountForTag < employeeCountForTag) {
-        errors.push(<li>
+        errors.push(<li key={ `employeeCountForTag_${ tag }` }>
           There are <b>{ employeeCountForTag }</b> employees in the <b>{ tag }</b> team but only <b>{ tableCountForTag }</b> tables are tagged with this team.
         </li>)
       }

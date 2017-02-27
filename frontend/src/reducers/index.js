@@ -96,7 +96,7 @@ let mainReducer = function(state, action) {
       tableTags: tableTags
     })
 
-  case 'ADD_DISTANCE_CONSTRAINT':
+  case 'ADD_DISTANCE_CONSTRAINT': {
     const distanceConstraints = _.clone(state.distanceConstraints)
     distanceConstraints.push({
       id: uuid(),
@@ -107,6 +107,7 @@ let mainReducer = function(state, action) {
     return _.assign({}, state, {
       distanceConstraints: distanceConstraints
     })
+  }
 
   case 'SET_SOLVER_STATE':
     switch (action.state) {
@@ -128,6 +129,19 @@ let mainReducer = function(state, action) {
     default:
       return;
     }
+
+  case 'DELETE_EMPLOYEE':
+    const employeeNames = _.without(state.employeeNames, action.employeeName)
+    const employeeTags = _.omit(state.employeeTags, action.employeeName)
+    const distanceConstraints = _.reject(state.distanceConstraints, (constraint) => {
+      return constraint.employee1Name === action.employeeName || constraint.employee2Name === action.employeeName
+    })
+
+    return _.assign({}, state, {
+      employeeNames: employeeNames,
+      employeeTags: employeeTags,
+      distanceConstraints: distanceConstraints
+    })
 
   default:
     return _.assign({}, state)
