@@ -6,13 +6,14 @@ let mainReducer = function(state, action) {
   switch (action.type) {
 
   case 'SET_NUM_ROWS': {
+    const numRows = action.payload
     const numCols = state.layout.length > 0 ? state.layout[0].length : 0
-    const layout = _.map(_.range(action.numRows), function() {
+    const layout = _.map(_.range(numRows), function() {
       return _.map(_.range(numCols), function() {
         return false
       })
     })
-    const tableTags = _.map(_.range(action.numRows), function() {
+    const tableTags = _.map(_.range(numRows), function() {
       return _.map(_.range(numCols), function() {
         return []
       })
@@ -25,13 +26,14 @@ let mainReducer = function(state, action) {
 
   case 'SET_NUM_COLS': {
     const numRows = state.layout.length
+    const numCols = action.payload
     const layout = _.map(_.range(numRows), function() {
-      return _.map(_.range(action.numCols), function() {
+      return _.map(_.range(numCols), function() {
         return false
       })
     })
     const tableTags = _.map(_.range(numRows), function() {
-      return _.map(_.range(action.numCols), function() {
+      return _.map(_.range(numCols), function() {
         return []
       })
     })
@@ -42,73 +44,66 @@ let mainReducer = function(state, action) {
   }
 
   case 'ADD_EMPLOYEE': {
+    const employeeName = action.payload
     return _.assign({}, state, {
-      employeeNames: [...state.employeeNames, action.employeeName]
+      employeeNames: [...state.employeeNames, employeeName]
     })
   }
 
   case 'ADD_TAG': {
+    const tag = action.payload
     let currentTagBeingAssigned = state.currentTagBeingAssigned
     if (!currentTagBeingAssigned && state.isAssigningTags) {
-      currentTagBeingAssigned = action.tag
+      currentTagBeingAssigned = tag
     }
     return _.assign({}, state, {
-      tags: [...state.tags, action.tag],
+      tags: [...state.tags, tag],
       currentTagBeingAssigned: currentTagBeingAssigned
     })
   }
 
   case 'SET_EMPLOYEE_TAG': {
+    const { employeeName, tag } = action.payload
     const newEmployeeTags = _.assign({}, state.employeeTags)
-    newEmployeeTags[action.employeeName] = action.tag
+    newEmployeeTags[employeeName] = tag
     return _.assign({}, state, {
       employeeTags: newEmployeeTags
     })
   }
 
   case 'SET_LOCATION_HAS_TABLE': {
+    const { rowIndex, colIndex, hasTable } = action.payload
     const layout = _.cloneDeep(state.layout)
-    layout[action.rowIndex][action.colIndex] = action.hasTable
+    layout[rowIndex][colIndex] = hasTable
     const tableTags = _.cloneDeep(state.tableTags)
-    tableTags[action.rowIndex][action.colIndex] = []
+    tableTags[rowIndex][colIndex] = []
     return _.assign({}, state, {
       layout: layout,
       tableTags: tableTags
     })
   }
 
-  case 'SET_IS_ASSIGNING_TAGS': {
-    return _.assign({}, state, {
-      isAssigningTags: action.isAssigningTags,
-      currentTagBeingAssigned: state.tags[0]
-    })
-  }
-
-  case 'SET_CURRENT_TAG_BEING_ASSIGNED': {
-    return _.assign({}, state, {
-      currentTagBeingAssigned: action.tag
-    })
-  }
-
   case 'TOGGLE_TAG_FOR_TABLE': {
-    const tags = state.tableTags[action.rowIndex][action.colIndex]
-    const tableAlreadyHasThisTag = _.includes(tags, action.tag)
+    const { rowIndex, colIndex, tag } = action.payload
+    const tags = state.tableTags[rowIndex][colIndex]
+    const tableAlreadyHasThisTag = _.includes(tags, tag)
     const tableTags = _.cloneDeep(state.tableTags)
-    tableTags[action.rowIndex][action.colIndex] = tableAlreadyHasThisTag
-      ? _.without(tags, action.tag)
-      : _.concat(tags, action.tag)
+    tableTags[rowIndex][colIndex] = tableAlreadyHasThisTag
+      ? _.without(tags, tag)
+      : _.concat(tags, tag)
     return _.assign({}, state, {
       tableTags: tableTags
     })
   }
 
   case 'ADD_DISTANCE_CONSTRAINT': {
+    const { employee1Name, employee2Name, distance } = action.payload
     const distanceConstraints = _.clone(state.distanceConstraints)
     distanceConstraints.push({
       id: uuid(),
-      employee1Name: action.employee1Name,
-      employee2Name: action.employee2Name,
-      distance: action.distance,
+      employee1Name: employee1Name,
+      employee2Name: employee2Name,
+      distance: distance,
     })
     return _.assign({}, state, {
       distanceConstraints: distanceConstraints
@@ -138,10 +133,11 @@ let mainReducer = function(state, action) {
   }
 
   case 'DELETE_EMPLOYEE': {
-    const employeeNames = _.without(state.employeeNames, action.employeeName)
-    const employeeTags = _.omit(state.employeeTags, action.employeeName)
+    const employeeName = action.payload
+    const employeeNames = _.without(state.employeeNames, employeeName)
+    const employeeTags = _.omit(state.employeeTags, employeeName)
     const distanceConstraints = _.reject(state.distanceConstraints, (constraint) => {
-      return constraint.employee1Name === action.employeeName || constraint.employee2Name === action.employeeName
+      return constraint.employee1Name === employeeName || constraint.employee2Name === employeeName
     })
 
     return _.assign({}, state, {
@@ -152,14 +148,15 @@ let mainReducer = function(state, action) {
   }
 
   case 'DELETE_TAG': {
-    const tags = _.without(state.tags, action.tag)
+    const tag = action.payload
+    const tags = _.without(state.tags, tag)
     const tableTags = _.cloneDeep(state.tableTags)
     _.each(tableTags, (row) => {
       _.each(row, (tags) => {
-        _.pull(tags, action.tag)
+        _.pull(tags, tag)
       })
     })
-    const employeeTags = _.omitBy(state.employeeTags, value => value === action.tag)
+    const employeeTags = _.omitBy(state.employeeTags, value => value === tag)
     return _.assign({}, state, {
       tags: tags,
       tableTags: tableTags,
@@ -168,7 +165,8 @@ let mainReducer = function(state, action) {
   }
 
   case 'DELETE_DISTANCE_CONSTRAINT': {
-    const constraints = _.reject(state.distanceConstraints, constraint => constraint.id === action.constraintId)
+    const constraintId = action.payload
+    const constraints = _.reject(state.distanceConstraints, constraint => constraint.id === constraintId)
     return _.assign({}, state, {
       distanceConstraints: constraints
     })

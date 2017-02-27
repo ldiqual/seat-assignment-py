@@ -1,82 +1,32 @@
 const axios = require('axios')
 const _ = require('lodash')
+const createAction = require('redux-actions').createAction
 
-function setNumRows(numRows) {
-  return {
-    type: 'SET_NUM_ROWS',
-    numRows: numRows
-  }
-}
+const setNumRows = createAction('SET_NUM_ROWS')
+const setNumCols = createAction('SET_NUM_COLS')
 
-function setNumCols(numCols) {
-  return {
-    type: 'SET_NUM_COLS',
-    numCols: numCols
-  }
-}
+const addEmployee = createAction('ADD_EMPLOYEE')
+const deleteEmployee = createAction('DELETE_EMPLOYEE')
+const addTag = createAction('ADD_TAG')
+const deleteTag = createAction('DELETE_TAG')
 
-function addEmployee(employeeName) {
-  return {
-    type: 'ADD_EMPLOYEE',
-    employeeName: employeeName
-  }
-}
+const setEmployeeTag = createAction('SET_EMPLOYEE_TAG', (employeeName, tag) => {
+  return { employeeName, tag }
+})
 
-function addTag(tag) {
-  return {
-    type: 'ADD_TAG',
-    tag: tag
-  }
-}
+const setLocationHasTable = createAction('SET_LOCATION_HAS_TABLE', (rowIndex, colIndex, hasTable) => {
+  return { rowIndex, colIndex, hasTable }
+})
 
-function setEmployeeTag(employeeName, tag) {
-  return {
-    type: 'SET_EMPLOYEE_TAG',
-    employeeName: employeeName,
-    tag: tag
-  }
-}
+const toggleTagForTable = createAction('TOGGLE_TAG_FOR_TABLE', (rowIndex, colIndex, tag) => {
+  return { rowIndex, colIndex, tag }
+})
 
-function setLocationHasTable(rowIndex, colIndex, hasTable) {
-  return {
-    type: 'SET_LOCATION_HAS_TABLE',
-    rowIndex: rowIndex,
-    colIndex: colIndex,
-    hasTable: hasTable
-  }
-}
+const addDistanceConstraint = createAction('ADD_DISTANCE_CONSTRAINT', (employee1Name, employee2Name, distance) => {
+  return { employee1Name, employee2Name, distance }
+})
 
-function setIsAssigningTags(isAssigningTags) {
-  return {
-    type: 'SET_IS_ASSIGNING_TAGS',
-    isAssigningTags: isAssigningTags
-  }
-}
-
-function setCurrentTagBeingAssigned(tag) {
-  return {
-    type: 'SET_CURRENT_TAG_BEING_ASSIGNED',
-    tag: tag
-  }
-}
-
-function toggleTagForTable(rowIndex, colIndex, tag) {
-  return {
-    type: 'TOGGLE_TAG_FOR_TABLE',
-    rowIndex: rowIndex,
-    colIndex: colIndex,
-    tag: tag
-  }
-}
-
-function addDistanceConstraint(employee1Name, employee2Name, distance) {
-  return {
-    type: 'ADD_DISTANCE_CONSTRAINT',
-    employee1Name: employee1Name,
-    employee2Name: employee2Name,
-    distance: distance
-  }
-}
+const deleteDistanceConstraint = createAction('DELETE_DISTANCE_CONSTRAINT', constraint => constraint.id)
 
 function solve() {
   return (dispatch, getState) => {
@@ -123,27 +73,6 @@ function solve() {
   }
 }
 
-function deleteEmployee(employeeName) {
-  return {
-    type: 'DELETE_EMPLOYEE',
-    employeeName: employeeName
-  }
-}
-
-function deleteTag(tag) {
-  return {
-    type: 'DELETE_TAG',
-    tag: tag
-  }
-}
-
-function deleteDistanceConstraint(constraint) {
-  return {
-    type: 'DELETE_DISTANCE_CONSTRAINT',
-    constraintId: constraint.id
-  }
-}
-
 export {
   setNumRows,
   setNumCols,
@@ -151,8 +80,6 @@ export {
   addTag,
   setEmployeeTag,
   setLocationHasTable,
-  setIsAssigningTags,
-  setCurrentTagBeingAssigned,
   toggleTagForTable,
   addDistanceConstraint,
   solve,

@@ -106,6 +106,7 @@ class DistanceConstraintSettings extends React.Component {
           <table id="distance-constraint-table" className="table table-striped">
             <tbody>
               <tr>
+                <td></td>
                 <td>
                   <label htmlFor="employee1-name-input" className="sr-only">Employee 1</label>
                   { employee1Select }
