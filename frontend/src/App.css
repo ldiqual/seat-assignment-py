@@ -26,38 +26,38 @@
 }
 
 #layout-table {
-    border-collapse: separate;
-    border-spacing: 2px;
+  border-collapse: separate;
+  border-spacing: 2px;
 }
 
 #layout-table td {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    user-select: none;
-    cursor: default;
-    padding: 5px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
 #layout-table tr:nth-child(2n) td:nth-child(2n+1) {
-    background-color: #ecf0f1;
+  background-color: #ecf0f1;
 }
 
 #layout-table tr:nth-child(2n+1) td:nth-child(2n) {
-    background-color: #ecf0f1;
+  background-color: #ecf0f1;
 }
 
 #layout-table td:hover {
-    background-color: #95a5a6 !important;
-    color: white;
+  background-color: #95a5a6 !important;
+  color: white;
 }
 
 #layout-table td.selected {
-    background-image: url(images/table.png);
-    background-size: 75%, 75%, contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
+  background-image: url(images/table.png);
+  background-size: 75%, 75%, contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
 }
 
 /* Tags */
@@ -83,35 +83,35 @@
 }
 
 #table-tag-table {
-    border-collapse: separate;
-    border-spacing: 2px;
+  border-collapse: separate;
+  border-spacing: 2px;
 }
 
 #table-tag-table td {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    user-select: none;
-    cursor: default;
-    padding: 5px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  user-select: none;
+  padding: 5px;
 }
 
 #table-tag-table tr:nth-child(2n) td:nth-child(2n+1) {
-    background-color: #ecf0f1;
+  background-color: #ecf0f1;
 }
 
 #table-tag-table tr:nth-child(2n+1) td:nth-child(2n) {
-    background-color: #ecf0f1;
-}
-
-#table-tag-table td:hover {
-    background-color: #95a5a6 !important;
-    color: white;
+  background-color: #ecf0f1;
 }
 
 #table-tag-table td.selected {
-    background-color: #2ecc71 !important;
-    color: white;
+  background-color: #2ecc71 !important;
+  color: white;
+  cursor: pointer;
+}
+
+#table-tag-table td.selected:hover {
+  background-color: #27ae60 !important;
+  color: white;
 }
 
 #tag-assignment-selector button {
@@ -130,6 +130,52 @@
   margin-right:10px;
 }
 
+/* Position constraints container */
+
+#position-constraint-container {
+  padding-bottom: 50px;
+}
+
+#position-constraint-container {
+  padding-bottom: 50px;
+}
+
+#position-constraint-table {
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+#position-constraint-table td {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  user-select: none;
+  padding: 5px;
+}
+
+#position-constraint-table tr:nth-child(2n) td:nth-child(2n+1) {
+  background-color: #ecf0f1;
+}
+
+#position-constraint-table tr:nth-child(2n+1) td:nth-child(2n) {
+  background-color: #ecf0f1;
+}
+
+#position-constraint-table td.selected {
+  background-color: #f1c40f !important;
+  cursor: pointer;
+}
+
+#position-constraint-table td.assigned {
+  background-color: #f1c40f !important;
+  cursor: pointer;
+  color: white;
+}
+
+#position-constraint-table td.selected:hover, #position-constraint-table td.assigned:hover {
+  background-color: #f39c12 !important;
+}
+
 /* Summary */
 
 #summary-container {
@@ -137,30 +183,30 @@
 }
 
 #summary-table {
-    border-collapse: separate;
-    border-spacing: 2px;
+  border-collapse: separate;
+  border-spacing: 2px;
 }
 
 #summary-table td {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    user-select: none;
-    cursor: default;
-    padding: 5px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  user-select: none;
+  cursor: default;
+  padding: 5px;
 }
 
 #summary-table tr:nth-child(2n) td:nth-child(2n+1) {
-    background-color: #ecf0f1;
+  background-color: #ecf0f1;
 }
 
 #summary-table tr:nth-child(2n+1) td:nth-child(2n) {
-    background-color: #ecf0f1;
+  background-color: #ecf0f1;
 }
 
 #summary-table td.selected {
-    background-color: #9b59b6 !important;
-    color: white;
+  background-color: #9b59b6 !important;
+  color: white;
 }
 
 /* Result */
@@ -174,30 +220,30 @@
 }
 
 #result-table {
-    border-collapse: separate;
-    border-spacing: 2px;
+  border-collapse: separate;
+  border-spacing: 2px;
 }
 
 #result-table td {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    user-select: none;
-    cursor: default;
-    padding: 5px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  user-select: none;
+  cursor: default;
+  padding: 5px;
 }
 
 #result-table tr:nth-child(2n) td:nth-child(2n+1) {
-    background-color: #ecf0f1;
+  background-color: #ecf0f1;
 }
 
 #result-table tr:nth-child(2n+1) td:nth-child(2n) {
-    background-color: #ecf0f1;
+  background-color: #ecf0f1;
 }
 
 #result-table td.selected {
-    background-color: #34495e !important;
-    color: white;
+  background-color: #34495e !important;
+  color: white;
 }
 
 #result-error {
@@ -211,16 +257,16 @@
 /* Spinning. See http://stackoverflow.com/a/26283602 */
 
 .glyphicon.spinning {
-    animation: spin 1s infinite linear;
-    -webkit-animation: spin2 1s infinite linear;
+  animation: spin 1s infinite linear;
+  -webkit-animation: spin2 1s infinite linear;
 }
 
 @keyframes spin {
-    from { transform: scale(1) rotate(0deg); }
-    to { transform: scale(1) rotate(360deg); }
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
 }
 
 @-webkit-keyframes spin2 {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
 }

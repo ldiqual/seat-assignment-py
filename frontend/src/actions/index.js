@@ -26,7 +26,13 @@ const addDistanceConstraint = createAction('ADD_DISTANCE_CONSTRAINT', (employee1
   return { employee1Name, employee2Name, distance }
 })
 
+const addPositionConstraint = createAction('ADD_POSITION_CONSTRAINT', (employeeName, tableLocation) => {
+  return { employeeName, tableLocation }
+})
+
 const deleteDistanceConstraint = createAction('DELETE_DISTANCE_CONSTRAINT', constraint => constraint.id)
+const deletePositionConstraint = createAction('DELETE_POSITION_CONSTRAINT', constraint => constraint.id)
+
 const reset = createAction('RESET')
 
 function solve() {
@@ -83,9 +89,11 @@ export default {
   setLocationHasTable,
   toggleTagForTable,
   addDistanceConstraint,
+  deleteDistanceConstraint,
+  addPositionConstraint,
+  deletePositionConstraint,
   solve,
   deleteEmployee,
   deleteTag,
-  deleteDistanceConstraint,
   reset
 }

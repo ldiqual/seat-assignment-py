@@ -8,6 +8,7 @@ const initialState = {
     employeeTags: {},
     tableTags: _.times(10, () => _.times(10, () => [])),
     distanceConstraints: [],
+    positionConstraints: [],
     solverState: {
       state: 'idle'
     }
@@ -138,6 +139,29 @@ const mainReducer = function(state, action) {
     return {...state, distanceConstraints: distanceConstraints}
   }
 
+  case 'DELETE_DISTANCE_CONSTRAINT': {
+    const constraintId = action.payload
+    const constraints = _.reject(state.distanceConstraints, constraint => constraint.id === constraintId)
+    return {...state, distanceConstraints: constraints}
+  }
+
+  case 'ADD_POSITION_CONSTRAINT': {
+    const { employeeName, tableLocation } = action.payload
+    const positionConstraints = _.clone(state.positionConstraints)
+    positionConstraints.push({
+      id: uuid(),
+      employeeName: employeeName,
+      tableLocation: tableLocation,
+    })
+    return {...state, positionConstraints: positionConstraints}
+  }
+
+  case 'DELETE_POSITION_CONSTRAINT': {
+    const constraintId = action.payload
+    const constraints = _.reject(state.positionConstraints, constraint => constraint.id === constraintId)
+    return {...state, positionConstraints: constraints}
+  }
+
   case 'SET_SOLVER_STATE': {
     switch (action.state) {
     case 'loading':
@@ -186,12 +210,6 @@ const mainReducer = function(state, action) {
       tableTags: tableTags,
       employeeTags: employeeTags
     }
-  }
-
-  case 'DELETE_DISTANCE_CONSTRAINT': {
-    const constraintId = action.payload
-    const constraints = _.reject(state.distanceConstraints, constraint => constraint.id === constraintId)
-    return {...state, distanceConstraints: constraints}
   }
 
   case 'RESET': {

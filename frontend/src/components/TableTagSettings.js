@@ -57,7 +57,7 @@ class TableTagSettings extends React.Component {
     if (this.props.tags.length > 0) {
       tagParagraph = <p id="tag-assignment-selector">{ tags }</p>
     } else {
-      tagParagraph = <p>You didn't add a team yet. Please do so in the section above.</p>
+      tagParagraph = <p className="text-danger">You didn't add a team yet. Please do so in the section above.</p>
     }
 
     const errors = []
