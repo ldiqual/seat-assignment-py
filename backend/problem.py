@@ -105,12 +105,20 @@ class SeatingProblem:
                     sum += assignment_var
             self.problem += (sum == 1)
 
-    def add_distance_constraint(self, employee1_name, employee2_name, distance):
+    def add_distance_constraint(self, employee1_name, employee2_name, allowed_distances):
 
         self.add_assignment_variables_if_necessary()
 
         employee1_index = self.employees.index(employee1_name)
         employee2_index = self.employees.index(employee2_name)
+
+        distance_map = {
+            'next': 1,
+            'front': 2,
+            'diagonal': 4,
+        }
+
+        distance = max(map(lambda d: distance_map[d], allowed_distances))
 
         if employee1_index == -1 or employee2_index == -1:
             raise ValueError("Could not find index of one of the provided employees")
@@ -133,9 +141,10 @@ class SeatingProblem:
                         is_employee2_at_table2 = table2_assignment_vars[employee2_index]
                         are_both_true = self.add_and_return_logical_and_var(is_employee1_at_table1, is_employee2_at_table2)
                         distance_table1_table2 = self.get_distance_between_tables(table1_location, table2_location)
+
                         sum += (are_both_true * distance_table1_table2)
 
-        self.problem += (sum == distance)
+        self.problem += (sum <= distance)
 
     def add_position_constraint(self, employee_name, table_location):
         employee_index = self.employees.index(employee_name)
@@ -158,7 +167,21 @@ class SeatingProblem:
         return None
 
     def get_distance_between_tables(self, table1_location, table2_location):
-        return abs(table1_location.row - table2_location.row) + abs(table1_location.col - table2_location.col)
+
+        are_next_to = table1_location.row == table2_location.row and abs(table1_location.col - table2_location.col) == 1
+        are_in_front = table1_location.col == table2_location.col and abs(table1_location.row - table2_location.row) == 1
+        are_diagonal = abs(table1_location.col - table2_location.col) == 1
+
+        if are_next_to:
+            return 1
+
+        if are_in_front:
+            return 2
+
+        if are_diagonal:
+            return 4
+
+        return 8
 
     def add_and_return_logical_and_var(self, var1, var2):
         var_name = 'and_{}_{}'.format(var1.name, var2.name)

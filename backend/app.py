@@ -59,7 +59,15 @@ def solve():
             'required': True,
             'type': 'list',
             'schema': {
-                'distance': {'required': True, 'type': 'integer', 'min': 1},
+                'allowedDistances': {
+                    'required': True,
+                    'type': 'list',
+                    'minlength': 1,
+                    'schema': {
+                        'type': 'string',
+                        'allowed': ['next', 'front', 'diagonal']
+                    }
+                },
                 'employee1Name': {'required': True, 'type': 'string', 'empty': False},
                 'employee2Name': {'required': True, 'type': 'string', 'empty': False},
             }
@@ -100,8 +108,8 @@ def solve():
     for constraint in json['distanceConstraints']:
         employee1_name = constraint['employee1Name']
         employee2_name = constraint['employee2Name']
-        distance = constraint['distance']
-        problem.add_distance_constraint(employee1_name=employee1_name, employee2_name=employee2_name, distance=distance)
+        allowed_distances = constraint['allowedDistances']
+        problem.add_distance_constraint(employee1_name=employee1_name, employee2_name=employee2_name, allowed_distances=allowed_distances)
 
     for constraint in json['positionConstraints']:
         employee_name = constraint['employeeName']
