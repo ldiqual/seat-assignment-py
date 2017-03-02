@@ -88,6 +88,20 @@ class EmployeeSettings extends React.Component {
       }
     })
 
+    const numEmployees = this.props.employeeNames.length
+    const numTables = _.reduce(this.props.layout, (count, cols) => {
+      return count + _.reduce(cols, (count, hasTable) => {
+        return hasTable ? count + 1 : count
+      }, 0)
+    }, 0)
+    if (numEmployees > numTables) {
+      errors.push(
+        <li key="too-many-tables">
+          There are more employees <b>({ numEmployees })</b> than there are tables <b>({ numTables })</b>
+        </li>
+      )
+    }
+
     let errorParagraph
     if (errors.length > 0) {
       errorParagraph = (
@@ -126,7 +140,8 @@ const mapStateToProps = function(state) {
   return {
     employeeNames: state.employeeNames,
     employeeTags: state.employeeTags,
-    tags: state.tags
+    tags: state.tags,
+    layout: state.layout
   }
 }
 

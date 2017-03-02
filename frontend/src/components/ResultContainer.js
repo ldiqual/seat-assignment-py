@@ -68,7 +68,8 @@ class ResultContainer extends React.Component {
 
 const mapStateToProps = function(state) {
   return {
-    solverState: state.solverState
+    solverState: state.solverState,
+    layout: state.layout
   }
 }
 

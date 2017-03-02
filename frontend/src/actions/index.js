@@ -43,7 +43,8 @@ function solve() {
       'employeeNames',
       'employeeTags',
       'tableTags',
-      'distanceConstraints'
+      'distanceConstraints',
+      'positionConstraints',
     ])
 
     dispatch({
@@ -72,6 +73,7 @@ function solve() {
       })
     })
     .catch(error => {
+      console.error(error)
       dispatch({
         type: 'SET_SOLVER_STATE',
         state: 'failed'
