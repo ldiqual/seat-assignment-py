@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from cerberus import Validator
 from flask_cors import cross_origin, CORS
 
-from problem import SeatingProblem
+from problem import SeatingProblem, Location
 
 app = Flask(__name__)
 CORS(app)
@@ -63,7 +63,22 @@ def solve():
                 'employee1Name': {'required': True, 'type': 'string', 'empty': False},
                 'employee2Name': {'required': True, 'type': 'string', 'empty': False},
             }
-        }
+        },
+        'positionConstraints': {
+            'required': True,
+            'type': 'list',
+            'schema': {
+                'tableLocation': {
+                    'required': True,
+                    'type': 'dict',
+                    'schema': {
+                        'rowIndex': {'required': True, 'type': 'integer', 'min': 0},
+                        'colIndex': {'required': True, 'type': 'integer', 'min': 0},
+                    }
+                },
+                'employeeName': {'required': True, 'type': 'string', 'empty': False},
+            }
+        },
     }
 
     validator = Validator(schema)
@@ -88,7 +103,11 @@ def solve():
         distance = constraint['distance']
         problem.add_distance_constraint(employee1_name=employee1_name, employee2_name=employee2_name, distance=distance)
 
-    #problem.add_position_constraint(employee_name='Randy', table_location=Location(row=0, col=0))
+    for constraint in json['positionConstraints']:
+        employee_name = constraint['employeeName']
+        table_location = constraint['tableLocation']
+        location = Location(row=table_location['rowIndex'], col=table_location['colIndex'])
+        problem.add_position_constraint(employee_name=employee_name, table_location=location)
 
     result = problem.solve()
 
