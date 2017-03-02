@@ -22,8 +22,8 @@ const toggleTagForTable = createAction('TOGGLE_TAG_FOR_TABLE', (rowIndex, colInd
   return { rowIndex, colIndex, tag }
 })
 
-const addDistanceConstraint = createAction('ADD_DISTANCE_CONSTRAINT', (employee1Name, employee2Name, distance) => {
-  return { employee1Name, employee2Name, distance }
+const addDistanceConstraint = createAction('ADD_DISTANCE_CONSTRAINT', (employee1Name, employee2Name, allowedDistances) => {
+  return { employee1Name, employee2Name, allowedDistances }
 })
 
 const addPositionConstraint = createAction('ADD_POSITION_CONSTRAINT', (employeeName, tableLocation) => {

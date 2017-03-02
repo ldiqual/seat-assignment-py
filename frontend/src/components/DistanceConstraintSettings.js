@@ -11,7 +11,7 @@ class DistanceConstraintSettings extends React.Component {
     this.state = {
       employee1Name: '',
       employee2Name: '',
-      distance: 1
+      allowedDistances: ['next'] // 'front', 'diagonal'
     }
   }
 
@@ -20,7 +20,7 @@ class DistanceConstraintSettings extends React.Component {
 
     const employee1Name = this.state.employee1Name
     const employee2Name = this.state.employee2Name
-    const distance = this.state.distance
+    const allowedDistances = this.state.allowedDistances
 
     if (!employee1Name || employee1Name.length === 0) {
       return
@@ -28,16 +28,12 @@ class DistanceConstraintSettings extends React.Component {
     if (!employee2Name || employee2Name.length === 0) {
       return
     }
-    if (!distance || distance < 1) {
-      return
-    }
 
     this.setState({
       employee1Name: '',
-      employee2Name: '',
-      distance: 1
+      employee2Name: ''
     })
-    this.props.dispatch(Actions.addDistanceConstraint(employee1Name, employee2Name, distance))
+    this.props.dispatch(Actions.addDistanceConstraint(employee1Name, employee2Name, allowedDistances))
   }
 
   setEmployee1Name = (event) => {
@@ -50,6 +46,30 @@ class DistanceConstraintSettings extends React.Component {
 
   setDistance = (event) => {
     this.setState({ distance: parseInt(event.target.value, 10) })
+  }
+
+  toggleNext = () => {
+    const isEnabled = _.includes(this.state.allowedDistances, 'next')
+    const allowedDistances = isEnabled
+      ? _.without(this.state.allowedDistances, 'next', 'front', 'diagonal')
+      : _.union(this.state.allowedDistances, 'next')
+    this.setState({ allowedDistances: allowedDistances })
+  }
+
+  toggleFront = () => {
+    const isEnabled = _.includes(this.state.allowedDistances, 'front')
+    const allowedDistances = isEnabled
+      ? _.without(this.state.allowedDistances, 'front', 'diagonal')
+      : _.union(this.state.allowedDistances, ['next', 'front'])
+    this.setState({ allowedDistances: allowedDistances })
+  }
+
+  toggleDiagonal = () => {
+    const isEnabled = _.includes(this.state.allowedDistances, 'diagonal')
+    const allowedDistances = isEnabled
+      ? _.without(this.state.allowedDistances, 'diagonal')
+      : _.union(this.state.allowedDistances, ['front', 'next', 'diagonal'])
+    this.setState({ allowedDistances: allowedDistances })
   }
 
   render() {
@@ -78,6 +98,19 @@ class DistanceConstraintSettings extends React.Component {
         this.props.dispatch(Actions.deleteDistanceConstraint(constraint))
       }
 
+      const constraintDescriptions = _.map(constraint.allowedDistances, distance => {
+        switch (distance) {
+        case 'next':
+          return 'next to each other'
+        case 'front':
+          return 'in front of each other'
+        case 'diagonal':
+          return 'diagonally'
+        default:
+          return '?'
+        }
+      })
+
       return (
         <tr key={ constraint.id }>
           <td key="actions">
@@ -87,7 +120,7 @@ class DistanceConstraintSettings extends React.Component {
           </td>
           <td key="employee1Name">{ constraint.employee1Name }</td>
           <td key="employee2Name">{ constraint.employee2Name }</td>
-          <td key="constraint">{ constraint.distance }</td>
+          <td key="constraint">have to sit { constraintDescriptions.join(', or ') }</td>
           <td></td>
         </tr>
       )
@@ -116,8 +149,18 @@ class DistanceConstraintSettings extends React.Component {
                   { employee2Select }
                 </td>
                 <td>
-                  <label htmlFor="distance-input">Distance</label>
-                  <input id="distance-input" type="number" className="form-control" onChange={ this.setDistance } value={ this.state.distance } placeholder="1" />
+                  <b>They have have to sit:</b><br/>
+                  <input
+                    checked={ _.includes(this.state.allowedDistances, 'next') }
+                    onChange={ this.toggleNext }
+                    type="checkbox" disabled="true"/> next to each other<br/>
+                  <input
+                    checked={ _.includes(this.state.allowedDistances, 'front') }
+                    onChange={ this.toggleFront }
+                    type="checkbox"/> or in front of each other<br/>
+                  <input checked={ _.includes(this.state.allowedDistances, 'diagonal') }
+                    onChange={ this.toggleDiagonal }
+                    type="checkbox"/> or diagonally
                 </td>
                 <td><button type="submit" className="btn btn-default">Add</button></td>
               </tr>

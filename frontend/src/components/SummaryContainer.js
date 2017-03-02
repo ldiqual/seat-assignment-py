@@ -36,9 +36,23 @@ class SummaryContainer extends React.Component {
     })
 
     const constraints = _.map(this.props.distanceConstraints, (constraint) => {
+
+      const constraintDescriptions = _.map(constraint.allowedDistances, distance => {
+        switch (distance) {
+        case 'next':
+          return 'next to each other'
+        case 'front':
+          return 'in front of each other'
+        case 'diagonal':
+          return 'diagonally'
+        default:
+          return '?'
+        }
+      })
+
       return (
         <li key={ constraint.id }>
-          <b>{ constraint.employee1Name }</b> and <b>{ constraint.employee2Name }</b> have to be <b>{ constraint.distance }</b> tables apart
+          <b>{ constraint.employee1Name }</b> and <b>{ constraint.employee2Name }</b> have to sit { constraintDescriptions.join(', or ') }
         </li>
       )
     })
@@ -60,7 +74,10 @@ class SummaryContainer extends React.Component {
           <div className="col-md-4">
             <h4>Employees</h4>
             <ul>{ employeeLis }</ul>
-
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
             <h4>Constraints</h4>
             <ul>{ constraints }</ul>
           </div>

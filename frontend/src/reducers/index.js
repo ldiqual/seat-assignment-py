@@ -128,13 +128,13 @@ const mainReducer = function(state, action) {
   }
 
   case 'ADD_DISTANCE_CONSTRAINT': {
-    const { employee1Name, employee2Name, distance } = action.payload
+    const { employee1Name, employee2Name, allowedDistances } = action.payload
     const distanceConstraints = _.clone(state.distanceConstraints)
     distanceConstraints.push({
       id: uuid(),
       employee1Name: employee1Name,
       employee2Name: employee2Name,
-      distance: distance,
+      allowedDistances: allowedDistances,
     })
     return {...state, distanceConstraints: distanceConstraints}
   }
