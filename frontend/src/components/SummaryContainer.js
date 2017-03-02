@@ -8,10 +8,22 @@ class SummaryContainer extends React.Component {
 
     const rows = _.map(this.props.layout, (row, rowIndex) => {
       const cols = _.map(row, (hasTable, colIndex) => {
+
         const tags = this.props.tableTags[rowIndex][colIndex]
+        const constraintForTable = _.find(this.props.positionConstraints, constraint => {
+          return constraint.tableLocation.rowIndex === rowIndex && constraint.tableLocation.colIndex === colIndex
+        })
+
+        let text
+        if (constraintForTable) {
+          text = <b>{ constraintForTable.employeeName }</b>
+        } else {
+          text = <i>{ tags.join('\n') }</i>
+        }
+
         return (
           <td key={ colIndex } className={ hasTable ? 'selected' : '' }>
-            { tags.join('\n') }
+            { text }
           </td>
         )
       })
@@ -65,6 +77,7 @@ const mapStateToProps = function(state) {
     employeeNames: state.employeeNames,
     employeeTags: state.employeeTags,
     distanceConstraints: state.distanceConstraints,
+    positionConstraints: state.positionConstraints,
     tableTags: state.tableTags,
   }
 }
