@@ -74,7 +74,7 @@ function solve() {
   }
 }
 
-export {
+module.exports = {
   setNumRows,
   setNumCols,
   addEmployee,
