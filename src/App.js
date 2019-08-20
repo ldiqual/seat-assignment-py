@@ -1,14 +1,13 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
-const _ = require('lodash')
 
-import LayoutTableContainer from './components/LayoutTableContainer'
-import EmployeeSettings from './components/EmployeeSettings'
-import TagSettings from './components/TagSettings'
-import TableTagSettings from './components/TableTagSettings'
-import DistanceConstraintSettings from './components/DistanceConstraintSettings'
-import SummaryContainer from './components/SummaryContainer'
-import ResultContainer from './components/ResultContainer'
+const LayoutTableContainer = require('./components/LayoutTableContainer')
+const EmployeeSettings = require('./components/EmployeeSettings')
+const TagSettings = require('./components/TagSettings')
+const TableTagSettings = require('./components/TableTagSettings')
+const DistanceConstraintSettings = require('./components/DistanceConstraintSettings')
+const SummaryContainer = require('./components/SummaryContainer')
+const ResultContainer = require('./components/ResultContainer')
 
 require('bootstrap/dist/css/bootstrap.css')
 require('./App.css')

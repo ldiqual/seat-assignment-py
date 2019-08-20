@@ -7,7 +7,7 @@ let mainReducer = function(state, action) {
 
   case 'SET_NUM_ROWS': {
 
-    const currentNumRows = state.layout.length = state.layout.length
+    const currentNumRows = state.layout.length
     const numCols = state.layout.length > 0 ? state.layout[0].length : 0
     const numRows = action.payload
 
@@ -37,7 +37,6 @@ let mainReducer = function(state, action) {
   }
 
   case 'SET_NUM_COLS': {
-    const numRows = state.layout.length
     const numCols = action.payload
     const currentNumCols = state.layout.length > 0 ? state.layout[0].length : 0
 

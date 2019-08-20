@@ -2,7 +2,6 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const Provider = require('react-redux').Provider
 const Redux = require('redux')
-const _ = require('lodash')
 const thunk = require('redux-thunk').default
 const persistStore = require('redux-persist').persistStore
 const autoRehydrate = require('redux-persist').autoRehydrate
