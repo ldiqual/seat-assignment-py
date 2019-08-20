@@ -1,16 +1,16 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const LayoutTableContainer = require('./components/LayoutTableContainer')
-const EmployeeSettings = require('./components/EmployeeSettings')
-const TagSettings = require('./components/TagSettings')
-const TableTagSettings = require('./components/TableTagSettings')
-const DistanceConstraintSettings = require('./components/DistanceConstraintSettings')
-const SummaryContainer = require('./components/SummaryContainer')
-const ResultContainer = require('./components/ResultContainer')
+import LayoutTableContainer from './components/LayoutTableContainer'
+import EmployeeSettings from './components/EmployeeSettings'
+import TagSettings from './components/TagSettings'
+import TableTagSettings from './components/TableTagSettings'
+import DistanceConstraintSettings from './components/DistanceConstraintSettings'
+import SummaryContainer from './components/SummaryContainer'
+import ResultContainer from './components/ResultContainer'
 
-require('bootstrap/dist/css/bootstrap.css')
-require('./App.css')
+import 'bootstrap/dist/css/bootstrap.css'
+import './App.css'
 
 class App extends React.Component {
   render() {
@@ -46,4 +46,4 @@ class App extends React.Component {
   }
 }
 
-module.exports = ReactRedux.connect()(App)
+export default connect()(App)

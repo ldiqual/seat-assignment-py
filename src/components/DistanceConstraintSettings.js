@@ -1,8 +1,8 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const _ = require('lodash')
+import React from 'react'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
-const Actions = require('../actions')
+import Actions from '../actions'
 
 class DistanceConstraintSettings extends React.Component {
 
@@ -137,4 +137,4 @@ const mapStateToProps = function(state) {
   }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps)(DistanceConstraintSettings)
+export default connect(mapStateToProps)(DistanceConstraintSettings)

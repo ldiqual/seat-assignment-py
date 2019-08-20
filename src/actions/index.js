@@ -1,6 +1,6 @@
-const axios = require('axios')
-const _ = require('lodash')
-const createAction = require('redux-actions').createAction
+import axios from 'axios'
+import _ from 'lodash'
+import { createAction } from 'redux-actions'
 
 const setNumRows = createAction('SET_NUM_ROWS')
 const setNumCols = createAction('SET_NUM_COLS')
@@ -74,7 +74,7 @@ function solve() {
   }
 }
 
-module.exports = {
+export default {
   setNumRows,
   setNumCols,
   addEmployee,

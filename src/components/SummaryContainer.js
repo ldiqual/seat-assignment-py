@@ -1,6 +1,6 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const _ = require('lodash')
+import React from 'react'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
 class SummaryContainer extends React.Component {
 
@@ -69,4 +69,4 @@ const mapStateToProps = function(state) {
   }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps)(SummaryContainer)
+export default connect(mapStateToProps)(SummaryContainer)

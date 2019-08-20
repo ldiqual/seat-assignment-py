@@ -1,7 +1,23 @@
-const _ = require('lodash')
-const uuid = require('uuid/v4')
+import _ from 'lodash'
+import uuid from 'uuid/v4'
 
-let mainReducer = function(state, action) {
+const initialState = {
+    layout: _.times(10, () => _.times(10, () => false)),
+    employeeNames: [],
+    tags: [],
+    employeeTags: {},
+    tableTags: _.times(10, () => _.times(10, () => [])),
+    distanceConstraints: [],
+    solverState: {
+      state: 'idle'
+    }
+}
+
+const mainReducer = function(state, action) {
+  
+  if (typeof state === 'undefined') {
+    return initialState
+  }
 
   switch (action.type) {
 
@@ -187,22 +203,4 @@ let mainReducer = function(state, action) {
   }
 }
 
-mainReducer.initialState = function() {
-
-  const initialLayout = _.times(10, () => _.times(10, () => false))
-  const initialTableTags = _.times(10, () => _.times(10, () => []))
-
-  return {
-      layout: initialLayout,
-      employeeNames: [],
-      tags: [],
-      employeeTags: {},
-      tableTags: initialTableTags,
-      distanceConstraints: [],
-      solverState: {
-        state: 'idle'
-      }
-  }
-}
-
-module.exports = mainReducer
+export default mainReducer
