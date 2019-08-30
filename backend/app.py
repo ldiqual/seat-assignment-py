@@ -59,32 +59,38 @@ def solve():
             'required': True,
             'type': 'list',
             'schema': {
-                'allowedDistances': {
-                    'required': True,
-                    'type': 'list',
-                    'minlength': 1,
-                    'schema': {
-                        'type': 'string',
-                        'allowed': ['next', 'front', 'diagonal']
-                    }
-                },
-                'employee1Name': {'required': True, 'type': 'string', 'empty': False},
-                'employee2Name': {'required': True, 'type': 'string', 'empty': False},
+                'type': 'dict',
+                'schema': {
+                    'allowedDistances': {
+                        'required': True,
+                        'type': 'list',
+                        'minlength': 1,
+                        'schema': {
+                            'type': 'string',
+                            'allowed': ['next', 'front', 'diagonal']
+                        }
+                    },
+                    'employee1Name': {'required': True, 'type': 'string', 'empty': False},
+                    'employee2Name': {'required': True, 'type': 'string', 'empty': False},
+                }
             }
         },
         'positionConstraints': {
             'required': True,
             'type': 'list',
             'schema': {
-                'tableLocation': {
-                    'required': True,
-                    'type': 'dict',
-                    'schema': {
-                        'rowIndex': {'required': True, 'type': 'integer', 'min': 0},
-                        'colIndex': {'required': True, 'type': 'integer', 'min': 0},
-                    }
-                },
-                'employeeName': {'required': True, 'type': 'string', 'empty': False},
+                'type': 'dict',
+                'schema': {
+                    'tableLocation': {
+                        'required': True,
+                        'type': 'dict',
+                        'schema': {
+                            'rowIndex': {'required': True, 'type': 'integer', 'min': 0},
+                            'colIndex': {'required': True, 'type': 'integer', 'min': 0},
+                        }
+                    },
+                    'employeeName': {'required': True, 'type': 'string', 'empty': False},
+                }
             }
         },
     }
