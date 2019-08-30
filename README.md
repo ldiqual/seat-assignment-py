@@ -22,6 +22,7 @@ python app.py
 
 ```
 cd frontend
+nvm use
 npm install
 npm start
 ```
