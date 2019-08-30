@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import Actions from '../actions'
 
@@ -54,9 +57,9 @@ class EmployeeSettings extends React.Component {
 
       const cols = [
         <td key="actions" className="shrink">
-          <button type="button" className="btn btn-danger btn-xs" onClick={ deleteEmployee }>
-            <span className="glyphicon glyphicon-remove"></span>
-          </button>
+          <Button variant="danger" size="sm" onClick={ deleteEmployee }>
+            <FontAwesomeIcon icon={ faTimes } />
+          </Button>
         </td>,
         <td key="name" className="shrink">{ employeeName }</td>,
         <td key="tag" className="expand">

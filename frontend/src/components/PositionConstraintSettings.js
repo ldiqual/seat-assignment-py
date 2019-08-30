@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Button } from 'react-bootstrap'
 
 import Actions from '../actions'
 
@@ -116,16 +117,12 @@ class PositionConstraintSettings extends React.Component {
           this.setState({ employeeName: employeeName })
         }
 
-        const classes = ['btn', 'btn-sm']
-        if (this.state.employeeName === employeeName) {
-          classes.push('btn-primary')
-        } else {
-          classes.push('btn-default')
-        }
-
+        const variant = this.state.employeeName === employeeName ? 'primary' : 'secondary'
         return (
           <li key={ employeeName }>
-            <button className={ classes.join(' ') } onClick={ selectEmployee }>{ employeeName }</button>
+            <Button size="sm" variant={ variant } onClick={ selectEmployee }>
+              { employeeName }
+            </Button>
           </li>
         )
       })

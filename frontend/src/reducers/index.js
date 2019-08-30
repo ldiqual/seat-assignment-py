@@ -213,7 +213,7 @@ const mainReducer = function(state, action) {
   }
 
   case 'RESET': {
-    return mainReducer.initialState()
+    return initialState
   }
 
   default:

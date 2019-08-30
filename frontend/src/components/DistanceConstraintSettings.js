@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import Actions from '../actions'
 
@@ -114,9 +117,9 @@ class DistanceConstraintSettings extends React.Component {
       return (
         <tr key={ constraint.id }>
           <td key="actions">
-            <button type="button" className="btn btn-danger btn-xs" onClick={ deleteConstraint }>
-              <span className="glyphicon glyphicon-remove"></span>
-            </button>
+            <Button variant="danger" size="sm" onClick={ deleteConstraint }>
+              <FontAwesomeIcon icon={ faTimes } />
+            </Button>
           </td>
           <td key="employee1Name">{ constraint.employee1Name }</td>
           <td key="employee2Name">{ constraint.employee2Name }</td>
@@ -162,7 +165,9 @@ class DistanceConstraintSettings extends React.Component {
                     onChange={ this.toggleDiagonal }
                     type="checkbox"/> or diagonally
                 </td>
-                <td><button type="submit" className="btn btn-default">Add</button></td>
+                <td>
+                  <Button type="submit">Add</Button>
+                </td>
               </tr>
               { constraintRows }
             </tbody>

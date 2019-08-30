@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import Actions from '../actions'
 
@@ -47,9 +50,9 @@ class TagSettings extends React.Component {
         return (
           <tr key={ tag }>
             <td key="actions" className="shrink">
-              <button type="button" className="btn btn-danger btn-xs" onClick={ deleteTag }>
-                <span className="glyphicon glyphicon-remove"></span>
-              </button>
+              <Button variant="danger" size="sm" onClick={ deleteTag }>
+                <FontAwesomeIcon icon={ faTimes } />
+              </Button>
             </td>
             <td key="tag"  className="expand">{ tag }</td>
           </tr>

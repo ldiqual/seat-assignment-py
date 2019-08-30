@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay, faSync, faRedo } from '@fortawesome/free-solid-svg-icons'
 
 import Actions from '../actions'
 
@@ -16,11 +19,10 @@ class ResultContainer extends React.Component {
 
   render() {
 
-    let isLoading = this.props.solverState.state === 'loading'
-    let buttonClasses = ['btn', isLoading ? 'btn-info' : 'btn-primary']
-    let span = isLoading
-      ? <span className="glyphicon glyphicon-refresh spinning"></span>
-      : <span className="glyphicon glyphicon-play"></span>
+    const isLoading = this.props.solverState.state === 'loading'
+    const span = isLoading
+      ? <FontAwesomeIcon icon={ faSync } className="spinning" />
+      : <FontAwesomeIcon icon={ faPlay } />
 
     let table
     if (this.props.solverState.state === 'succeeded') {
@@ -50,12 +52,12 @@ class ResultContainer extends React.Component {
     return (
       <div id="result-container">
         <p id="result-actions">
-          <button type="button" onClick={ this.solve } className={ buttonClasses.join(' ') }>
+          <Button variant={ isLoading ? "info" : "primary" } onClick={ this.solve }>
             { span } { isLoading ? 'Solving...' : 'Solve this!' }
-          </button>
-          <button type="button" onClick={ this.reset } className="btn btn-danger">
-            <span className="glyphicon glyphicon-repeat"></span> Start over
-          </button>
+          </Button>
+          <Button variant="danger" onClick={ this.reset }>
+            <FontAwesomeIcon icon={ faRedo } /> Start over
+          </Button>
           { error }
         </p>
 

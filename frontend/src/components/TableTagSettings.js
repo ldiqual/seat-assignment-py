@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Button } from 'react-bootstrap'
 
 import Actions from '../actions'
 
@@ -41,8 +42,13 @@ class TableTagSettings extends React.Component {
       const setCurrentTagBeingAssigned = () => {
         this.setState({ currentTagBeingAssigned: tag })
       }
-      const classes = ['btn', 'btn-sm', this.state.currentTagBeingAssigned === tag ? 'btn-primary' : 'btn-default']
-      return <button key={ tag } onClick={ setCurrentTagBeingAssigned } className={ classes.join(' ') }>{ tag }</button>
+      return <Button
+        key={ tag }
+        size="sm"
+        variant={ this.state.currentTagBeingAssigned === tag ? 'primary' : 'secondary' }
+        onClick={ setCurrentTagBeingAssigned }>
+        { tag }
+      </Button>
     })
 
     if (this.props.tags.length === 0) {
