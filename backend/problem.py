@@ -39,7 +39,7 @@ class SeatingProblem:
 
         self.add_assignment_variables_if_necessary()
 
-        for employee_name, tag in employee_tags.iteritems():
+        for employee_name, tag in employee_tags.items():
             employee_index = self.employees.index(employee_name)
             if employee_index == -1:
                 raise ValueError("Could not find index of provided employee {}".format(employee_name))

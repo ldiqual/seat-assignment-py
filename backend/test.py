@@ -1,4 +1,5 @@
 from tabulate import tabulate
+from problem import SeatingProblem, Location
 
 employees = [
     'Robert', 'Scott', 'Guy', 'Bo', 'Idan', 'Chloe', 'Lois', 'Kaili', 'Alex', 'Randy', # Eng
@@ -82,7 +83,7 @@ problem.set_employees(employees)
 problem.set_table_layout(layout)
 problem.set_table_tags(table_tags)
 problem.set_employee_tags(employee_tags)
-problem.add_distance_constraint(employee1_name='Lois', employee2_name='Randy', distance=1)
+problem.add_distance_constraint(employee1_name='Lois', employee2_name='Randy', allowed_distances=['next'])
 problem.add_position_constraint(employee_name='Randy', table_location=Location(row=0, col=0))
 result = problem.solve()
 
