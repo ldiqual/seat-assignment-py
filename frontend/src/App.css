@@ -176,6 +176,10 @@
   background-color: #f39c12 !important;
 }
 
+#position-constraint-table .dropdown-toggle:after {
+  content: none
+}
+
 /* Summary */
 
 #summary-container {

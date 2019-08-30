@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { Button } from 'react-bootstrap'
+import { Button, Dropdown } from 'react-bootstrap'
 
 import Actions from '../actions'
 
@@ -83,22 +83,14 @@ class PositionConstraintSettings extends React.Component {
           this.props.dispatch(Actions.deletePositionConstraint(constraintForTable))
         }
 
-        const dropdownId = `dropdown-position-constraint-row-${rowIndex}-col-${colIndex}`
-
         return (
           <td key={ colIndex } onClick={ selectTable } className={ classes }>
-            <div className="dropdown">
-              <div className="dropdown-toggle" id={ dropdownId } data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                { text }
-              </div>
-              <ul className="dropdown-menu" aria-labelledby={ dropdownId }>
-                <li>
-                  <a onClick={ deleteConstraint }>
-                    <span className="text-danger">Delete</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <Dropdown>
+              <Dropdown.Toggle as="div">{ text }</Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={ deleteConstraint }>Delete</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </td>
         )
       })
