@@ -153,7 +153,7 @@ class DistanceConstraintSettings extends React.Component {
                   <input
                     checked={ _.includes(this.state.allowedDistances, 'next') }
                     onChange={ this.toggleNext }
-                    type="checkbox" disabled="true"/> next to each other<br/>
+                    type="checkbox" disabled={ true }/> next to each other<br/>
                   <input
                     checked={ _.includes(this.state.allowedDistances, 'front') }
                     onChange={ this.toggleFront }
