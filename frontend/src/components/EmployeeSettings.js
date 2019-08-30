@@ -60,8 +60,8 @@ class EmployeeSettings extends React.Component {
         </td>,
         <td key="name" className="shrink">{ employeeName }</td>,
         <td key="tag" className="expand">
-          <select value={ employeeTag } onChange={ setEmployeeTag } className="form-control">
-            <option disabled selected value>Select a team</option>
+          <select value={ employeeTag } defaultValue="none" onChange={ setEmployeeTag } className="form-control">
+            <option disabled value="none">Select a team</option>
             { tagOptions }
           </select>
         </td>
