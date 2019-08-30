@@ -38,7 +38,7 @@ class EmployeeSettings extends React.Component {
 
     var employeeRows = _.map(this.props.employeeNames, (employeeName) => {
 
-      const employeeTag = this.props.employeeTags[employeeName]
+      const employeeTag = this.props.employeeTags[employeeName] || "none"
       const setEmployeeTag = (event) => {
         let tag = event.target.value
         this.props.dispatch(Actions.setEmployeeTag(employeeName, tag))
@@ -60,7 +60,7 @@ class EmployeeSettings extends React.Component {
         </td>,
         <td key="name" className="shrink">{ employeeName }</td>,
         <td key="tag" className="expand">
-          <select value={ employeeTag } defaultValue="none" onChange={ setEmployeeTag } className="form-control">
+          <select value={ employeeTag } onChange={ setEmployeeTag } className="form-control">
             <option disabled value="none">Select a team</option>
             { tagOptions }
           </select>
